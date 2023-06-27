@@ -1,6 +1,6 @@
-const client = require("./client");
+const client = require("./index");
 
-async function createGraphicNovelBook ({ISBN, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription}) {
+async function createGraphicNovelBook (ISBN, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
     const {rows: [bookGN]} = await client.query(
       `
@@ -44,27 +44,27 @@ async function getAllGraphicNovelBooksByISBN(ISBN) {
   }
 }
 
-async function updateGraphicNovelBook({ISBN, ...fields}) {
-  try {
-    const toUpdate = {}
-    for(let column in fields) {
-      if(fields[column] !== undefined) toUpdate[column] = fields[column];
-    }
-    let bookGN;
-    if (util.dbFields(fields).insert.length > 0) {
-      const {rows} = await client.query(`
-          UPDATE "graphicNovelsAndMangaBooks"
-          SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${ISBN}
-          RETURNING *;
-      `, Object.values(toUpdate));
-      bookGN = rows[0];
-      return bookGN;
-    }
-  } catch (error) {
-    throw error;
-  }
-}
+// async function updateGraphicNovelBook(ISBN, ...fields) {
+//   try {
+//     const toUpdate = {}
+//     for(let column in fields) {
+//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
+//     }
+//     let bookGN;
+//     if (util.dbFields(fields).insert.length > 0) {
+//       const {rows} = await client.query(`
+//           UPDATE "graphicNovelsAndMangaBooks"
+//           SET ${ util.dbFields(toUpdate).insert }
+//           WHERE id=${ISBN}
+//           RETURNING *;
+//       `, Object.values(toUpdate));
+//       bookGN = rows[0];
+//       return bookGN;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function destroyGraphicNovelBook(ISBN) {
   try {
@@ -83,6 +83,6 @@ module.exports = {
   createGraphicNovelBook,
   getAllGraphicNovelBooks,
   getAllGraphicNovelBooksByISBN,
-  updateGraphicNovelBook,
+  // updateGraphicNovelBook,
   destroyGraphicNovelBook
 };

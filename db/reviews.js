@@ -1,10 +1,10 @@
-const client = require("./client");
+const client = require("./index");
 
 async function createReview(content, score, userId, nfBookId, fictionBookId, graphicBookId, bookClubBookId, childrensBookId) {
   try {
     const {rows: [review]} = await client.query(
       `
-    INSERT INTO reviews (content, score, "user_id", "nfBook_id", "fictionBook_id", "graphicNovel_id", "bookClubBook_id", "childrensBook_id" )
+    INSERT INTO reviews (content, score, "user_id", "nfBook_id", "fictionBook_id", "graphicBook_id", "bookClubBook_id", "childrensBook_id" )
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
     `,
@@ -19,13 +19,13 @@ async function createReview(content, score, userId, nfBookId, fictionBookId, gra
 
 async function getAllReviews() {
   try {
-    const [rows] = await client.query(
+    const {rows} = await client.query(
       `
       SELECT *
       FROM reviews;
     `
     );
-
+console.log(rows, "**")
     return rows;
   } catch (error) {
     throw error;

@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index");
 
 async function createNFBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
@@ -44,27 +44,27 @@ async function getAllNFBooksByISBN(ISBN) {
   }
 }
 
-async function updateNFBook({ISBN, ...fields}) {
-  try {
-    const toUpdate = {}
-    for(let column in fields) {
-      if(fields[column] !== undefined) toUpdate[column] = fields[column];
-    }
-    let bookNF;
-    if (util.dbFields(fields).insert.length > 0) {
-      const {rows} = await client.query(`
-          UPDATE "nfBooks"
-          SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${ISBN}
-          RETURNING *;
-      `, Object.values(toUpdate));
-      bookNF = rows[0];
-      return bookNF;
-    }
-  } catch (error) {
-    throw error;
-  }
-}
+// async function updateNFBook({ISBN, ...fields}) {
+//   try {
+//     const toUpdate = {}
+//     for(let column in fields) {
+//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
+//     }
+//     let bookNF;
+//     if (util.dbFields(fields).insert.length > 0) {
+//       const {rows} = await client.query(`
+//           UPDATE "nfBooks"
+//           SET ${ util.dbFields(toUpdate).insert }
+//           WHERE id=${ISBN}
+//           RETURNING *;
+//       `, Object.values(toUpdate));
+//       bookNF = rows[0];
+//       return bookNF;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function destroyNFBook(ISBN) {
   try {
@@ -84,6 +84,6 @@ module.exports = {
   createNFBook,
   getAllNFBooks,
   getAllNFBooksByISBN,
-  updateNFBook,
+  // updateNFBook,
   destroyNFBook
 };

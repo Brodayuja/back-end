@@ -1,20 +1,20 @@
-const client = require('./client');
+const client = require('./index');
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-async function createUser ({name, username, password, email, avatar, location, website, favoriteBooks, aboutMe, isAdmin}) {
+async function createUser (name, username, password, email, avatar, location, website, favoriteBooks, aboutMe, isAdmin) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT)
+  console.log("is hashPassword working?", hashedPassword)
   try {
     const {rows: [user]} = await client.query(
       `
-    INSERT INTO users (name, username, password, email, avatar, location, website, favoriteBooks, aboutMe, is_admin)
+    INSERT INTO users (name, username, password, email, avatar, location, website, "favoriteBooks", "aboutMe", "is_admin")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    ON CONFLICT (username) DO NOTHING
     RETURNING *;
     `,
       [name, username, hashedPassword, email, avatar, location, website, favoriteBooks, aboutMe, isAdmin]
     );
-
+      console.log("is query working?", user)
     return user;
   } catch (error) {
     throw error;

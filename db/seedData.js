@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index");
 const { createUser, getAllUsers } = require("./users");
 const { createNFBook, getAllNFBooks } = require("./nfBooks");
 const { createFictionBook, getAllFictionBooks } = require("./fictionBooks")
@@ -29,32 +29,35 @@ async function dropTables() {
 const createTables = async () => {
     try {
         await client.query(`
-        CRATE TABLE "nfBooks" (
-            "ISBN" PRIMARY KEY INT UNIQUE,
+        CREATE TABLE "nfBooks" (
+            id SERIAL PRIMARY KEY,
+            "ISBN" BIGINT NOT NULL,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
             summary TEXT,
             publisher VARCHAR(500),
             "yearPublished" INT NOT NULL,
-            "bookCover" NVARCHAR(2083),
+            "bookCover" VARCHAR(2083),
             "physicalDescription" VARCHAR(255)
         )`);
         await client.query(`
-        CRATE TABLE "fictionBooks" (
-            "ISBN" PRIMARY KEY INT UNIQUE,
+        CREATE TABLE "fictionBooks" (
+            id SERIAL PRIMARY KEY,
+            "ISBN" BIGINT NOT NULL,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
             summary TEXT,
             publisher VARCHAR(500),
             "yearPublished" INT NOT NULL,
-            "bookCover" NVARCHAR(2083),
+            "bookCover" VARCHAR(2083),
             "physicalDescription" VARCHAR(255)
         )`);
         await client.query(`
-        CRATE TABLE "graphicNovelsAndMangaBooks" (
-            "ISBN" PRIMARY KEY INT UNIQUE,
+        CREATE TABLE "graphicNovelsAndMangaBooks" (
+            id SERIAL PRIMARY KEY,
+            "ISBN" BIGINT NOT NULL,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             artist VARCHAR(255),
@@ -62,24 +65,26 @@ const createTables = async () => {
             summary TEXT,
             publisher VARCHAR(500),
             "yearPublished" INT NOT NULL,
-            "bookCover" NVARCHAR(2083),
+            "bookCover" VARCHAR(2083),
             "physicalDescription" VARCHAR(255)
         )`);
         await client.query(`
-        CRATE TABLE "bookClubPicksBooks" (
-            "ISBN" PRIMARY KEY INT UNIQUE,
+        CREATE TABLE "bookClubPicksBooks" (
+            id SERIAL PRIMARY KEY,
+            "ISBN" BIGINT NOT NULL,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
             summary TEXT,
             publisher VARCHAR(500),
             "yearPublished" INT NOT NULL,
-            "bookCover" NVARCHAR(2083),
+            "bookCover" VARCHAR(2083),
             "physicalDescription" VARCHAR(255)
         )`);
         await client.query(`
-        CRATE TABLE "childrensBooks" (
-            "ISBN" PRIMARY KEY INT UNIQUE,
+        CREATE TABLE "childrensBooks" (
+            id SERIAL PRIMARY KEY,
+            "ISBN" BIGINT NOT NULL,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             illustrator VARCHAR(255) NOT NULL,
@@ -87,35 +92,36 @@ const createTables = async () => {
             summary TEXT,
             publisher VARCHAR(500),
             "yearPublished" INT NOT NULL,
-            "bookCover" NVARCHAR(2083),
-            audience VARCHAR(255)
+            "bookCover" VARCHAR(2083),
+            audience VARCHAR(255),
             "physicalDescription" VARCHAR(255)
         )`);
         await client.query(`
-        CRATE TABLE users (
+        CREATE TABLE users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             username VARCHAR(255) NOT NULL,
             password VARCHAR(255) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
-            avatar NVARCHAR(2083),
+            avatar VARCHAR(2083),
             location VARCHAR(255),
-            website NVARCHAR(2083),
-            "favoriteBooks" VARCHAR(255)
+            website VARCHAR(2083),
+            "favoriteBooks" VARCHAR(255),
             "aboutMe" TEXT,
             "is_admin" BOOLEAN DEFAULT false
         )`);
+        console.log("????")
         await client.query(`
         CREATE TABLE reviews (
             id SERIAL PRIMARY KEY,
             content VARCHAR(255) NOT NULL,
             score INT NOT NULL,
             "user_id" INT REFERENCES users(id),
-            "nfBook_id" INT REFERENCES "nfBooks"(ISBN),
-            "fictionBook_id" INT REFERENCES "fictionBooks"(ISBN),
-            "graphicBook_id" INT REFERENCES "graphicNovelsAndMangaBooks"(ISBN),
-            "bookClubBook_id" INT REFERENCES "bookClubPicksBooks"(ISBN),
-            "childrensBook_id" INT REFERENCES "childrensBooks"(ISBN)
+            "nfBook_id" INT REFERENCES "nfBooks"(id),
+            "fictionBook_id" INT REFERENCES "fictionBooks"(id),
+            "graphicBook_id" INT REFERENCES "graphicNovelsAndMangaBooks"(id),
+            "bookClubBook_id" INT REFERENCES "bookClubPicksBooks"(id),
+            "childrensBook_id" INT REFERENCES "childrensBooks"(id)
         )`);
         console.log("Finished creating tables.")
     } catch (error) {
@@ -219,12 +225,12 @@ async function createInitialReviews() {
     try {
         console.log("Starting to create reviews.")
 
-        await createReview ("Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!", 5, 1, "", "", "", 9780593321447, "")
+        await createReview ("Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!", 5, 1, null, null, null, 2, null)
 
-        await createReview("I REALLY enjoyed this book!!! Fizzy was a funny and fiesty MC, Connor was a perfect book boyfriend, the plot was creative and I loved the character and plot crossovers from THE SOULMATE EQUATION.", 4, 2, "", 9781982173432, "", "", "")
-
-        await createReview("This book is such a great mix of memoir, travelogue, and birding. Filled with empathy, humor, nature, and hard-won wisdom, I recommend this to readers who enjoy well-written non-fiction.", 5, 3, 9780593242384, "", "", "", "")
-
+        await createReview("I REALLY enjoyed this book!!! Fizzy was a funny and fiesty MC, Connor was a perfect book boyfriend, the plot was creative and I loved the character and plot crossovers from THE SOULMATE EQUATION.", 4, 2, null, 2, null, null, null)
+        
+        await createReview("This book is such a great mix of memoir, travelogue, and birding. Filled with empathy, humor, nature, and hard-won wisdom, I recommend this to readers who enjoy well-written non-fiction.", 5, 3, 2, null, null, null, null)
+        console.log("###")
         const allCreatedReviews = await getAllReviews();
         console.log("All Reviews", allCreatedReviews);
         console.log("Finished creating initial reviews.")

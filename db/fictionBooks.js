@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index");
 
 async function createFictionBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
@@ -44,27 +44,27 @@ async function getAllFictionBooksByISBN(ISBN) {
   }
 }
 
-async function updateFictionBook({ISBN, ...fields}) {
-  try {
-    const toUpdate = {}
-    for(let column in fields) {
-      if(fields[column] !== undefined) toUpdate[column] = fields[column];
-    }
-    let bookFic;
-    if (util.dbFields(fields).insert.length > 0) {
-      const {rows} = await client.query(`
-          UPDATE "fictionBooks"
-          SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${ISBN}
-          RETURNING *;
-      `, Object.values(toUpdate));
-      bookFic = rows[0];
-      return bookFic;
-    }
-  } catch (error) {
-    throw error;
-  }
-}
+// async function updateFictionBook({ISBN, ...fields}) {
+//   try {
+//     const toUpdate = {}
+//     for(let column in fields) {
+//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
+//     }
+//     let bookFic;
+//     if (util.dbFields(fields).insert.length > 0) {
+//       const {rows} = await client.query(`
+//           UPDATE "fictionBooks"
+//           SET ${ util.dbFields(toUpdate).insert }
+//           WHERE id=${ISBN}
+//           RETURNING *;
+//       `, Object.values(toUpdate));
+//       bookFic = rows[0];
+//       return bookFic;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function destroyFictionBook(ISBN) {
   try {
@@ -85,6 +85,6 @@ module.exports = {
   createFictionBook,
   getAllFictionBooks,
   getAllFictionBooksByISBN,
-  updateFictionBook,
+  // updateFictionBook,
   destroyFictionBook
 };
