@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index");
 
 async function createBookClubPicksBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
@@ -45,27 +45,27 @@ async function getAllBookClubPicksBooksByISBN(ISBN) {
   }
 }
 
-async function updateBookClubPicksBook({ISBN, ...fields}) {
-  try {
-    const toUpdate = {}
-    for(let column in fields) {
-      if(fields[column] !== undefined) toUpdate[column] = fields[column];
-    }
-    let bookClub;
-    if (util.dbFields(fields).insert.length > 0) {
-      const {rows} = await client.query(`
-          UPDATE "bookClubPicksBooks"
-          SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${ISBN}
-          RETURNING *;
-      `, Object.values(toUpdate));
-      bookClub = rows[0];
-      return bookClub;
-    }
-  } catch (error) {
-    throw error;
-  }
-}
+// async function updateBookClubPicksBook({ISBN, ...fields}) {
+//   try {
+//     const toUpdate = {}
+//     for(let column in fields) {
+//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
+//     }
+//     let bookClub;
+//     if (util.dbFields(fields).insert.length > 0) {
+//       const {rows} = await client.query(`
+//           UPDATE "bookClubPicksBooks"
+//           SET ${ util.dbFields(toUpdate).insert }
+//           WHERE id=${ISBN}
+//           RETURNING *;
+//       `, Object.values(toUpdate));
+//       bookClub = rows[0];
+//       return bookClub;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function destroyBookClubPicksBook(ISBN) {
   try {
@@ -84,6 +84,6 @@ module.exports = {
   createBookClubPicksBook,
   getAllBookClubPicksBooks,
   getAllBookClubPicksBooksByISBN,
-  updateBookClubPicksBook,
+  // updateBookClubPicksBook,
   destroyBookClubPicksBook
 };
