@@ -73,7 +73,9 @@ async function destroyFictionBook(ISBN) {
         WHERE id = $1
         RETURNING *;
     `, [ISBN]);
+    if (rows.length) {
     return bookFic;
+  }
   } catch (error) {
     throw error;
   }
