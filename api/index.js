@@ -12,41 +12,41 @@ router.get('/health', async (req, res, next)=>{
     }
 })
 
-//set req.user
-router.use(async (req, res, next) => {
-  const prefix = 'Bearer ';
-  const auth = req.header('Authorization');
+// //set req.user
+// router.use(async (req, res, next) => {
+//   const prefix = 'Bearer ';
+//   const auth = req.header('Authorization');
   
-  if (!auth) { // nothing to see here
-    next();
-  } else if (auth.startsWith(prefix)) {
-    const token = auth.slice(prefix.length);
+//   if (!auth) { // nothing to see here
+//     next();
+//   } else if (auth.startsWith(prefix)) {
+//     const token = auth.slice(prefix.length);
     
-    try {
-      const parsedToken = jwt.verify(token, JWT_SECRET);
+//     try {
+//       const parsedToken = jwt.verify(token, JWT_SECRET);
       
-      const id = parsedToken && parsedToken.id
-      if (id) {
-        req.user = await getUserById(id);
-        next();
-      }
-    } catch (error) {
-      next(error);
-    }
-  } else {
-    next({
-      name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${ prefix }`
-    });
-  }
-});
+//       const id = parsedToken && parsedToken.id
+//       if (id) {
+//         req.user = await getUserById(id);
+//         next();
+//       }
+//     } catch (error) {
+//       next(error);
+//     }
+//   } else {
+//     next({
+//       name: 'AuthorizationHeaderError',
+//       message: `Authorization token must start with ${ prefix }`
+//     });
+//   }
+// });
 
-router.use((req, res, next) => {
-  if (req.user) {
-    console.log("User is set:", req.user);
-  }
-  next();
-});
+// router.use((req, res, next) => {
+//   if (req.user) {
+//     console.log("User is set:", req.user);
+//   }
+//   next();
+// });
 
 
 //ROUTER: /api/users
@@ -62,19 +62,19 @@ const nfBooksRouter = require('./nfBooks');
 router.use('/nonfiction-books', nfBooksRouter);
 
 //ROUTER: /api/fiction-books
-const fictionBooks = require('./fictionBooks');
-router.use('/fiction-books', fictionBooks);
+const fictionBooksRouter = require('./fictionBooks');
+router.use('/fiction-books', fictionBooksRouter);
 
 //ROUTER: /api/graphic-books
-const graphicBooks = require('./graphicBooks');
-router.use('/graphic-books', graphicBooks);
+const graphicBooksRouter = require('./graphicBooks');
+router.use('/graphic-books', graphicBooksRouter);
 
 //ROUTER: /api/book-club-picks
-const bookClubBooks = require('./bookClubBooks');
-router.use('/book-club-picks', bookClubBooks);
+const bookClubBooksRouter = require('./bookClubBooks');
+router.use('/book-club-picks', bookClubBooksRouter);
 
 //ROUTER: /api/childrens-books
-const childrensBooks = require('./childrensBooks');
-router.use('/childrens-books', childrensBooks);
+const childrensBooksRouter = require('./childrensBooks');
+router.use('/childrens-books', childrensBooksRouter);
 
 module.exports = router;

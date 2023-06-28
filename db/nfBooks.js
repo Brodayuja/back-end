@@ -43,7 +43,7 @@ async function getAllNFBooksByISBN(ISBN) {
     throw error;
   }
 }
-
+// HOW DO YOU DO THIS WITHOUT OBJECT DESTRUCTURING?
 // async function updateNFBook({ISBN, ...fields}) {
 //   try {
 //     const toUpdate = {}
