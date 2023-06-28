@@ -45,27 +45,36 @@ async function getAllBookClubPicksBooksByISBN(ISBN) {
   }
 }
 
-// async function updateBookClubPicksBook({ISBN, ...fields}) {
-//   try {
-//     const toUpdate = {}
-//     for(let column in fields) {
-//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
-//     }
-//     let bookClub;
-//     if (util.dbFields(fields).insert.length > 0) {
-//       const {rows} = await client.query(`
-//           UPDATE "bookClubPicksBooks"
-//           SET ${ util.dbFields(toUpdate).insert }
-//           WHERE id=${ISBN}
-//           RETURNING *;
-//       `, Object.values(toUpdate));
-//       bookClub = rows[0];
-//       return bookClub;
-//     }
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+async function updateBookClubPicksBook(id, fields = {}) {
+  // build the set string 
+  const fieldsKeys = Object.keys(fields)
+  console.log(fieldsKeys, "fieldsKeys in update picks")
+  
+  const mapOfStrings = fieldsKeys.map(
+    (key, index) => `"${ key }"=$${ index + 1 }`
+  )
+  console.log (mapOfStrings, "map of string in update picks")
+  
+  const setString =  mapOfStrings.join(', ');
+  console.log (setString, "set string on update picks")
+  // return early if this is called without fields
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const { rows: [ bookClub ] } = await client.query(`
+      UPDATE "bookClubPicksBooks"
+      SET ${ setString }
+      WHERE id=${ id }
+      RETURNING *;
+    `, Object.values(fields));
+
+    return bookClub;
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function destroyBookClubPicksBook(ISBN) {
   try {
@@ -84,6 +93,6 @@ module.exports = {
   createBookClubPicksBook,
   getAllBookClubPicksBooks,
   getAllBookClubPicksBooksByISBN,
-  // updateBookClubPicksBook,
+  updateBookClubPicksBook,
   destroyBookClubPicksBook
 };

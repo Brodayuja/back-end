@@ -2,7 +2,7 @@ const express = require("express");
 const fictionBooksRouter = express.Router();
 const {createFictionBook, getAllFictionBooks, getAllFictionBooksByISBN, updateFictionBook, destroyFictionBook } = require("../db/fictionBooks.js");
 
-fictionBooksRouter.get("/fiction-books", async (req, res, next) => {
+fictionBooksRouter.get("/", async (req, res, next) => {
   try {
     const allFictionBooks = await getAllFictionBooks()
     res.send(allFictionBooks);
@@ -11,7 +11,7 @@ fictionBooksRouter.get("/fiction-books", async (req, res, next) => {
   }
 });
 
-fictionBooksRouter.get("/fiction-books/:isbn", async (req, res, next) => {
+fictionBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
       const singleFictionBook = await getAllFictionBooksByISBN(Number(req.params.isbn))
@@ -22,7 +22,7 @@ fictionBooksRouter.get("/fiction-books/:isbn", async (req, res, next) => {
     });
 
 
-fictionBooksRouter.post("/fiction-books", async (req, res, next) => {
+fictionBooksRouter.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
     const newFictionBook = await createFictionBook(req.body);
@@ -32,7 +32,7 @@ fictionBooksRouter.post("/fiction-books", async (req, res, next) => {
   }
 });
 
-fictionBooksRouter.delete("/fiction-books/:isbn", async (req, res) => {
+fictionBooksRouter.delete("/:isbn", async (req, res) => {
   try {
     console.log(req.params.isbn)
     const deletedFictionBook = await destroyFictionBook(Number(req.params.isbn))
@@ -42,16 +42,16 @@ fictionBooksRouter.delete("/fiction-books/:isbn", async (req, res) => {
   }
 });
 
-// fictionBooksRouter.put("/fiction-books/:isbn", async (req, res) => {
-//   try {
-//     console.log(req.params.isbn)
-//     const bookISBN = Number(req.params.isbn)
-//     const updatedData = req.body
-//     const NewlyUpdatedFictionBook = await updateFictionBook(bookISBN, updatedData)
-//     res.send(NewlyUpdatedFictionBook)
-//   } catch (error) {
-//     throw (error)
-//   }
-// })
+fictionBooksRouter.put("/:isbn", async (req, res) => {
+  try {
+    console.log(req.params.isbn)
+    const bookISBN = Number(req.params.isbn)
+    const updatedData = req.body
+    const NewlyUpdatedFictionBook = await updateFictionBook(bookISBN, updatedData)
+    res.send(NewlyUpdatedFictionBook)
+  } catch (error) {
+    throw (error)
+  }
+})
 
 module.exports = fictionBooksRouter;

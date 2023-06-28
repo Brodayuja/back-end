@@ -2,7 +2,7 @@ const express = require("express");
 const nfBooksRouter = express.Router();
 const {createNFBook, getAllNFBooks, getAllNFBooksByISBN, updateNFBook, destroyNFBook } = require("../db/nfBooks.js");
 
-nfBooksRouter.get("/nonfiction-books", async (req, res, next) => {
+nfBooksRouter.get("/", async (req, res, next) => {
   try {
     const allNFBooks = await getAllNFBooks()
     res.send(allNFBooks);
@@ -11,7 +11,7 @@ nfBooksRouter.get("/nonfiction-books", async (req, res, next) => {
   }
 });
 
-nfBooksRouter.get("/nonfiction-books/:isbn", async (req, res, next) => {
+nfBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
       const singleNFBook = await getAllNFBooksByISBN(Number(req.params.isbn))
@@ -22,7 +22,7 @@ nfBooksRouter.get("/nonfiction-books/:isbn", async (req, res, next) => {
     });
 
 
-nfBooksRouter.post("/nonfiction-books", async (req, res, next) => {
+nfBooksRouter.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
     const newNFBook = await createNFBook(req.body);
@@ -32,7 +32,7 @@ nfBooksRouter.post("/nonfiction-books", async (req, res, next) => {
   }
 });
 
-nfBooksRouter.delete("/nonfiction-books/:isbn", async (req, res) => {
+nfBooksRouter.delete("/:isbn", async (req, res) => {
   try {
     console.log(req.params.isbn)
     const deletedNFBook = await destroyNFBook(Number(req.params.isbn))
@@ -42,16 +42,16 @@ nfBooksRouter.delete("/nonfiction-books/:isbn", async (req, res) => {
   }
 });
 
-// nfBooksRouter.put("/nonfiction-books/:isbn", async (req, res) => {
-//   try {
-//     console.log(req.params.isbn)
-//     const bookISBN = Number(req.params.isbn)
-//     const updatedData = req.body
-//     const NewlyUpdatedNFBook = await updateNFBook(bookISBN, updatedData)
-//     res.send(NewlyUpdatedNFBook)
-//   } catch (error) {
-//     throw (error)
-//   }
-// })
+nfBooksRouter.put("/:isbn", async (req, res) => {
+  try {
+    console.log(req.params.isbn)
+    const bookISBN = Number(req.params.isbn)
+    const updatedData = req.body
+    const NewlyUpdatedNFBook = await updateNFBook(bookISBN, updatedData)
+    res.send(NewlyUpdatedNFBook)
+  } catch (error) {
+    throw (error)
+  }
+})
 
 module.exports = nfBooksRouter;
