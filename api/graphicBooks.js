@@ -2,7 +2,7 @@ const express = require("express");
 const graphicBooksRouter = express.Router();
 const { createGraphicNovelBook, getAllGraphicNovelBooks, getAllGraphicNovelBooksByISBN, updateGraphicNovelBook, destroyGraphicNovelBook } = require("../db/graphicBooks.js");
 
-graphicBooksRouter.get("/graphic-books", async (req, res, next) => {
+graphicBooksRouter.get("/", async (req, res, next) => {
   try {
     const allGraphicBooks = await getAllGraphicNovelBooks()
     res.send(allGraphicBooks);
@@ -11,7 +11,7 @@ graphicBooksRouter.get("/graphic-books", async (req, res, next) => {
   }
 });
 
-graphicBooksRouter.get("/graphic-books/:isbn", async (req, res, next) => {
+graphicBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
       const singleGraphicBook = await getAllGraphicNovelBooksByISBN(Number(req.params.isbn))
@@ -22,7 +22,7 @@ graphicBooksRouter.get("/graphic-books/:isbn", async (req, res, next) => {
     });
 
 
-graphicBooksRouter.post("/graphic-books", async (req, res, next) => {
+graphicBooksRouter.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
     const newGraphicBook = await createGraphicNovelBook(req.body);
@@ -32,7 +32,7 @@ graphicBooksRouter.post("/graphic-books", async (req, res, next) => {
   }
 });
 
-graphicBooksRouter.delete("/graphic-books/:isbn", async (req, res) => {
+graphicBooksRouter.delete("/:isbn", async (req, res) => {
   try {
     console.log(req.params.isbn)
     const deletedGraphicBook = await destroyGraphicNovelBook(Number(req.params.isbn))
@@ -42,16 +42,16 @@ graphicBooksRouter.delete("/graphic-books/:isbn", async (req, res) => {
   }
 });
 
-// graphicBooksRouter.put("/graphic-books/:isbn", async (req, res) => {
-//   try {
-//     console.log(req.params.isbn)
-//     const bookISBN = Number(req.params.isbn)
-//     const updatedData = req.body
-//     const NewlyUpdatedGraphicBook = await updateGraphicNovelBook(bookISBN, updatedData)
-//     res.send(NewlyUpdatedGraphicBook)
-//   } catch (error) {
-//     throw (error)
-//   }
-// })
+graphicBooksRouter.put("/:isbn", async (req, res) => {
+  try {
+    console.log(req.params.isbn)
+    const bookISBN = Number(req.params.isbn)
+    const updatedData = req.body
+    const NewlyUpdatedGraphicBook = await updateGraphicNovelBook(bookISBN, updatedData)
+    res.send(NewlyUpdatedGraphicBook)
+  } catch (error) {
+    throw (error)
+  }
+})
 
 module.exports = graphicBooksRouter;

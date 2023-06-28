@@ -2,7 +2,7 @@ const express = require("express");
 const bookClubBooksRouter = express.Router();
 const { createBookClubPicksBook, getAllBookClubPicksBooks, getAllBookClubPicksBooksByISBN, updateBookClubPicksBook, destroyBookClubPicksBook } = require("../db/bookClubBooks.js");
 
-bookClubBooksRouter.get("/book-club-picks", async (req, res, next) => {
+bookClubBooksRouter.get("/", async (req, res, next) => {
   try {
     const allBookClubPicks = await getAllBookClubPicksBooks()
     res.send(allBookClubPicks);
@@ -11,7 +11,7 @@ bookClubBooksRouter.get("/book-club-picks", async (req, res, next) => {
   }
 });
 
-bookClubBooksRouter.get("/book-club-picks/:isbn", async (req, res, next) => {
+bookClubBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
       const singleBookClubPick = await getAllBookClubPicksBooksByISBN(Number(req.params.isbn))
@@ -22,7 +22,7 @@ bookClubBooksRouter.get("/book-club-picks/:isbn", async (req, res, next) => {
     });
 
 
-bookClubBooksRouter.post("/book-club-picks", async (req, res, next) => {
+bookClubBooksRouter.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
     const newBookClubPick = await createBookClubPicksBook(req.body);
@@ -32,7 +32,7 @@ bookClubBooksRouter.post("/book-club-picks", async (req, res, next) => {
   }
 });
 
-bookClubBooksRouter.delete("/book-club-picks/:isbn", async (req, res) => {
+bookClubBooksRouter.delete("/:isbn", async (req, res) => {
   try {
     console.log(req.params.isbn)
     const deletedBookClubPick = await destroyBookClubPicksBook(Number(req.params.isbn))
@@ -42,16 +42,16 @@ bookClubBooksRouter.delete("/book-club-picks/:isbn", async (req, res) => {
   }
 });
 
-// bookClubBooksRouter.put("/book-club-picks/:isbn", async (req, res) => {
-//   try {
-//     console.log(req.params.isbn)
-//     const bookISBN = Number(req.params.isbn)
-//     const updatedData = req.body
-//     const NewlyUpdatedBookClubPick = await updateBookClubPicksBook(bookISBN, updatedData)
-//     res.send(NewlyUpdatedBookClubPick)
-//   } catch (error) {
-//     throw (error)
-//   }
-// })
+bookClubBooksRouter.put("/:isbn", async (req, res) => {
+  try {
+    console.log(req.params.isbn)
+    const bookISBN = Number(req.params.isbn)
+    const updatedData = req.body
+    const NewlyUpdatedBookClubPick = await updateBookClubPicksBook(bookISBN, updatedData)
+    res.send(NewlyUpdatedBookClubPick)
+  } catch (error) {
+    throw (error)
+  }
+})
 
 module.exports = bookClubBooksRouter;

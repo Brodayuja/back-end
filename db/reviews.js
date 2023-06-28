@@ -47,27 +47,37 @@ async function getReviewsByUserId({userId}) {
   }
 }
 
-// async function updateReview({id, ...fields}) {
-//   try {
-//     const toUpdate = {}
-//     for(let column in fields) {
-//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
-//     }
-//     let review;
-//     if (util.dbFields(fields).insert.length > 0) {
-//       const {rows} = await client.query(`
-//           UPDATE reviews
-//           SET ${ util.dbFields(toUpdate).insert }
-//           WHERE id=${id}
-//           RETURNING *;
-//       `, Object.values(toUpdate));
-//       review = rows[0];
-//       return review;
-//     }
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+async function updateReview(id, fields = {}) {
+  // build the set string 
+  const fieldsKeys = Object.keys(fields)
+  console.log(fieldsKeys, "fieldsKeys in update review")
+  
+  const mapOfStrings = fieldsKeys.map(
+    (key, index) => `"${ key }"=$${ index + 1 }`
+  )
+  console.log (mapOfStrings, "map of string in update review")
+  
+  const setString =  mapOfStrings.join(', ');
+  console.log (setString, "set string on update review")
+  // return early if this is called without fields
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const { rows: [ review ] } = await client.query(`
+      UPDATE reviews
+      SET ${ setString }
+      WHERE id=${ id }
+      RETURNING *;
+    `, Object.values(fields));
+
+    return review;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 async function destroyReview(id) {
   try {
@@ -86,6 +96,6 @@ module.exports = {
   createReview,
   getAllReviews,
   getReviewsByUserId,
-  // updateReview,
+  updateReview,
   destroyReview
 };

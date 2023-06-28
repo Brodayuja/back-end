@@ -44,27 +44,36 @@ async function getAllChildrensBooksByISBN(ISBN) {
   }
 }
 
-// async function updateChildrensBook({ISBN, ...fields}) {
-//   try {
-//     const toUpdate = {}
-//     for(let column in fields) {
-//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
-//     }
-//     let bookJuv;
-//     if (util.dbFields(fields).insert.length > 0) {
-//       const {rows} = await client.query(`
-//           UPDATE "childrensBooks"
-//           SET ${ util.dbFields(toUpdate).insert }
-//           WHERE id=${ISBN}
-//           RETURNING *;
-//       `, Object.values(toUpdate));
-//       bookJuv = rows[0];
-//       return bookJuv;
-//     }
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+async function updateChildrensBook(id, fields = {}) {
+  // build the set string 
+  const fieldsKeys = Object.keys(fields)
+  console.log(fieldsKeys, "fieldsKeys in update childrens books")
+  
+  const mapOfStrings = fieldsKeys.map(
+    (key, index) => `"${ key }"=$${ index + 1 }`
+  )
+  console.log (mapOfStrings, "map of string in update childrens books")
+  
+  const setString =  mapOfStrings.join(', ');
+  console.log (setString, "set string on update childrens books")
+  // return early if this is called without fields
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const { rows: [ bookJuv ] } = await client.query(`
+      UPDATE "childrensBooks"
+      SET ${ setString }
+      WHERE id=${ id }
+      RETURNING *;
+    `, Object.values(fields));
+
+    return bookJuv;
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function destroyChildrensBook(ISBN) {
   try {
@@ -83,6 +92,6 @@ module.exports = {
   createChildrensBook,
   getAllChildrensBooks,
   getAllChildrensBooksByISBN, 
-  // updateChildrensBook,
+  updateChildrensBook,
   destroyChildrensBook
 };

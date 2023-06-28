@@ -92,10 +92,58 @@ async function getUserById(userId) {
     throw error;
   }
 }
+
+async function updateUser(id, fields = {}) {
+  // build the set string 
+  const fieldsKeys = Object.keys(fields)
+  console.log(fieldsKeys, "fieldsKeys in update user")
+  
+  const mapOfStrings = fieldsKeys.map(
+    (key, index) => `"${ key }"=$${ index + 1 }`
+  )
+  console.log (mapOfStrings, "map of string in update user")
+  
+  const setString =  mapOfStrings.join(', ');
+  console.log (setString, "set string on update user")
+  // return early if this is called without fields
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const { rows: [ user ] } = await client.query(`
+      UPDATE users
+      SET ${ setString }
+      WHERE id=${ id }
+      RETURNING *;
+    `, Object.values(fields));
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function destroyUser(id) {
+  try {
+    const {rows: [user]} = await client.query(`
+        DELETE FROM users
+        WHERE id = $1
+        RETURNING *;
+    `, [id]);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   getAllUsers,
   getUser,
   getUserById,
   getUserByUsername,
+  updateUser,
+  destroyUser
 }
