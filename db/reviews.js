@@ -47,27 +47,27 @@ async function getReviewsByUserId({userId}) {
   }
 }
 
-async function updateReview({id, ...fields}) {
-  try {
-    const toUpdate = {}
-    for(let column in fields) {
-      if(fields[column] !== undefined) toUpdate[column] = fields[column];
-    }
-    let review;
-    if (util.dbFields(fields).insert.length > 0) {
-      const {rows} = await client.query(`
-          UPDATE reviews
-          SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${id}
-          RETURNING *;
-      `, Object.values(toUpdate));
-      review = rows[0];
-      return review;
-    }
-  } catch (error) {
-    throw error;
-  }
-}
+// async function updateReview({id, ...fields}) {
+//   try {
+//     const toUpdate = {}
+//     for(let column in fields) {
+//       if(fields[column] !== undefined) toUpdate[column] = fields[column];
+//     }
+//     let review;
+//     if (util.dbFields(fields).insert.length > 0) {
+//       const {rows} = await client.query(`
+//           UPDATE reviews
+//           SET ${ util.dbFields(toUpdate).insert }
+//           WHERE id=${id}
+//           RETURNING *;
+//       `, Object.values(toUpdate));
+//       review = rows[0];
+//       return review;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function destroyReview(id) {
   try {
@@ -86,6 +86,6 @@ module.exports = {
   createReview,
   getAllReviews,
   getReviewsByUserId,
-  updateReview,
+  // updateReview,
   destroyReview
 };
