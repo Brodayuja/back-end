@@ -4,7 +4,7 @@ async function createBookClubPicksBook (ISBN, title, author, genre, summary, pub
   try {
     const {rows: [bookClub]} = await client.query(
       `
-    INSERT INTO "bookClubPicksBooks" ("ISBN", title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
+    INSERT INTO "bookClubPicksBooks" (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,

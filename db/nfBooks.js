@@ -4,7 +4,7 @@ async function createNFBook (ISBN, title, author, genre, summary, publisher, yea
   try {
     const {rows: [bookNF]} = await client.query(
       `
-    INSERT INTO "nfBooks" ("ISBN", title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
+    INSERT INTO "nfBooks" (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,

@@ -4,7 +4,7 @@ async function createGraphicNovelBook (ISBN, title, author, artist, genre, summa
   try {
     const {rows: [bookGN]} = await client.query(
       `
-    INSERT INTO "graphicNovelsAndMangaBooks" ("ISBN", title, author, artist, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
+    INSERT INTO "graphicNovelsAndMangaBooks" (isbn, title, author, artist, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *;
     `,

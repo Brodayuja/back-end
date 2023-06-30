@@ -31,7 +31,7 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE "nfBooks" (
             id SERIAL PRIMARY KEY,
-            "ISBN" BIGINT NOT NULL,
+            isbn BIGINT NOT NULL UNIQUE,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
@@ -44,7 +44,7 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE "fictionBooks" (
             id SERIAL PRIMARY KEY,
-            "ISBN" BIGINT NOT NULL,
+            isbn BIGINT NOT NULL UNIQUE,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
@@ -57,7 +57,7 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE "graphicNovelsAndMangaBooks" (
             id SERIAL PRIMARY KEY,
-            "ISBN" BIGINT NOT NULL,
+            isbn BIGINT NOT NULL UNIQUE,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             artist VARCHAR(255),
@@ -71,7 +71,7 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE "bookClubPicksBooks" (
             id SERIAL PRIMARY KEY,
-            "ISBN" BIGINT NOT NULL,
+            isbn BIGINT NOT NULL UNIQUE,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             genre VARCHAR(255) NOT NULL,
@@ -84,7 +84,7 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE "childrensBooks" (
             id SERIAL PRIMARY KEY,
-            "ISBN" BIGINT NOT NULL,
+            isbn BIGINT NOT NULL UNIQUE,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             illustrator VARCHAR(255) NOT NULL,
@@ -112,20 +112,20 @@ const createTables = async () => {
             is_owner BOOLEAN DEFAULT false
         )`);
         await client.query(`
-        CREATE TABLE reviews (
+    
+          CREATE TABLE reviews (
           id SERIAL PRIMARY KEY,
-            content TEXT NOT NULL,
-            score INT NOT NULL,
-            user_id INT REFERENCES users(id),
-            "nfBook_isbn" BIGINT REFERENCES "nfBooks"("ISBN"),
-            "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"("ISBN"),
-            "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"("ISBN"),
-            "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"("ISBN"),
-            "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"("ISBN"),
-            "isInappropriate" BOOLEAN DEFAULT false,
-            "isNotAccurate" BOOLEAN DEFAULT false
+          content VARCHAR(1000) NOT NULL,
+          score INT NOT NULL,
+          user_id INT REFERENCES users(id),
+          "nfBook_isbn" BIGINT REFERENCES "nfBooks"(isbn),
+          "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"(isbn),
+          "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"(isbn),
+          "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"(isbn),
+          "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn),
+          "isInappropriate" BOOLEAN DEFAULT false,
+          "isNotAccurate" BOOLEAN DEFAULT false
         )`);
-        console.log("2222")
         await client.query(`
         CREATE TABLE reports (
           id SERIAL PRIMARY KEY,
@@ -143,7 +143,6 @@ const createTables = async () => {
           inappropriate BOOLEAN REFERENCES reviews("isInappropriate"),
           not_accurate BOOLEAN REFERENCES reviews("isNotAccurate")
           )`);
-          console.log("1111")
         await client.query(`
         CREATE TABLE ownership(
           id SERIAL PRIMARY KEY,
