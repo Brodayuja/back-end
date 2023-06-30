@@ -4,7 +4,7 @@ async function createChildrensBook (ISBN, title, author, illustrator, genre, sum
   try {
     const {rows: [bookJuv]} = await client.query(
       `
-    INSERT INTO "childrensBooks" ("ISBN", title, author, illustrator, genre, summary, publisher, "yearPublished", "bookCover", audience, "physicalDescription")
+    INSERT INTO "childrensBooks" (isbn, title, author, illustrator, genre, summary, publisher, "yearPublished", "bookCover", audience, "physicalDescription")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING *;
     `,

@@ -4,7 +4,7 @@ async function createFictionBook (ISBN, title, author, genre, summary, publisher
   try {
     const {rows: [bookFic]} = await client.query(
       `
-    INSERT INTO "fictionBooks" ("ISBN", title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
+    INSERT INTO "fictionBooks" (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,
