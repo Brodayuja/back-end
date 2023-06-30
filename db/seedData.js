@@ -108,20 +108,55 @@ const createTables = async () => {
             website VARCHAR(2083),
             "favoriteBooks" VARCHAR(255),
             "aboutMe" TEXT,
-            "is_admin" BOOLEAN DEFAULT false
+            is_admin BOOLEAN DEFAULT false,
+            is_owner BOOLEAN DEFAULT false
         )`);
-        console.log("????")
         await client.query(`
         CREATE TABLE reviews (
-            id SERIAL PRIMARY KEY,
-            content VARCHAR(255) NOT NULL,
+          id SERIAL PRIMARY KEY,
+            content TEXT NOT NULL,
             score INT NOT NULL,
-            "user_id" INT REFERENCES users(id),
-            "nfBook_id" INT REFERENCES "nfBooks"(id),
-            "fictionBook_id" INT REFERENCES "fictionBooks"(id),
-            "graphicBook_id" INT REFERENCES "graphicNovelsAndMangaBooks"(id),
-            "bookClubBook_id" INT REFERENCES "bookClubPicksBooks"(id),
-            "childrensBook_id" INT REFERENCES "childrensBooks"(id)
+            user_id INT REFERENCES users(id),
+            "nfBook_isbn" BIGINT REFERENCES "nfBooks"("ISBN"),
+            "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"("ISBN"),
+            "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"("ISBN"),
+            "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"("ISBN"),
+            "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"("ISBN"),
+            "isInappropriate" BOOLEAN DEFAULT false,
+            "isNotAccurate" BOOLEAN DEFAULT false
+        )`);
+        console.log("2222")
+        await client.query(`
+        CREATE TABLE reports (
+          id SERIAL PRIMARY KEY,
+          username VARCHAR(255) REFERENCES users(username),
+          user_id INT REFERENCES users(user_id),
+          user_name VARCHAR(255) users(name),
+          user_email VARCHAR(255) REFERENCES user(email),
+          content TEXT NOT NULL,
+          "reviewContent" TEXT REFERENCES reviews(content),
+          "nfBook_isbn" BIGINT REFERENCES reviews("nfBook_isbn"),
+          "fictionBook_isbn" BIGINT REFERENCES reviews("fictionBook_isbn"),
+          "graphicBook_isbn" BIGINT REFERENCES reviews("graphicBook_isbn"),
+          "bookClubBook_isbn" BIGINT REFERENCES reviews("bookClubBook_isbn"),
+          "childrensBook_isbn" BIGINT REFERENCES reviews("childrensBook_isbn"),
+          inappropriate BOOLEAN REFERENCES reviews("isInappropriate"),
+          not_accurate BOOLEAN REFERENCES reviews("isNotAccurate")
+          )`);
+          console.log("1111")
+        await client.query(`
+        CREATE TABLE ownership(
+          id SERIAL PRIMARY KEY,
+          username VARCHAR(255) REFERENCES users(username),
+          user_name VARCHAR(255) REFERENCES users(name),
+          user_email VARCHAR(255) REFERENCES users(email),
+          "nfBook_isbn" BIGINT REFERENCES reviews("nfBook_isbn"),
+          "fictionBook_isbn" BIGINT REFERENCES reviews("fictionBook_isbn"),
+          "graphicBook_isbn" BIGINT REFERENCES reviews("graphicBook_isbn"),
+          "bookClubBook_isbn" BIGINT REFERENCES reviews("bookClubBook_isbn"),
+          "childrensBook_isbn" BIGINT REFERENCES reviews("childrensBook_isbn"),
+          "isOwner" BOOLEAN REFERENCES users(is_owner),
+          content TEXT NOT NULL
         )`);
         console.log("Finished creating tables.")
     } catch (error) {
@@ -225,11 +260,11 @@ async function createInitialReviews() {
     try {
         console.log("Starting to create reviews.")
 
-        await createReview ("Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!", 5, 1, null, null, null, 2, null)
+        await createReview ("Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!", 5, 1, null, null, null, 9780593321447, null, false, false)
 
-        await createReview("I REALLY enjoyed this book!!! Fizzy was a funny and fiesty MC, Connor was a perfect book boyfriend, the plot was creative and I loved the character and plot crossovers from THE SOULMATE EQUATION.", 4, 2, null, 2, null, null, null)
+        await createReview("I REALLY enjoyed this book!!! Fizzy was a funny and fiesty MC, Connor was a perfect book boyfriend, the plot was creative and I loved the character and plot crossovers from THE SOULMATE EQUATION.", 4, 2, null, 9781982173432, null, null, null, false, false)
         
-        await createReview("This book is such a great mix of memoir, travelogue, and birding. Filled with empathy, humor, nature, and hard-won wisdom, I recommend this to readers who enjoy well-written non-fiction.", 5, 3, 2, null, null, null, null)
+        await createReview("This book is such a great mix of memoir, travelogue, and birding. Filled with empathy, humor, nature, and hard-won wisdom, I recommend this to readers who enjoy well-written non-fiction.", 5, 3, 9780393866704, null, null, null, null, false, false)
         console.log("###")
         const allCreatedReviews = await getAllReviews();
         console.log("All Reviews", allCreatedReviews);
