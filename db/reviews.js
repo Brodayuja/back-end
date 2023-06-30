@@ -1,14 +1,14 @@
 const client = require("./index");
 
-async function createReview(content, score, userId, nfBookId, fictionBookId, graphicBookId, bookClubBookId, childrensBookId) {
+async function createReview(content, score, userId, nfBookISBN, fictionBookISBN, graphicBookISBN, bookClubBookISBN, childrensBookISBN, isInappropriate, isNotAccurate) {
   try {
     const {rows: [review]} = await client.query(
       `
-    INSERT INTO reviews (content, score, "user_id", "nfBook_id", "fictionBook_id", "graphicBook_id", "bookClubBook_id", "childrensBook_id" )
+    INSERT INTO reviews (content, score, user_id, "nfBook_isbn", "fictionBook_isbn", "graphicBook_isbn", "bookClubBook_isbn", "childrensBook_isbn", "isInappropriate", "isNotAccurate")
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
     `,
-      [content, score, userId, nfBookId, fictionBookId, graphicBookId, bookClubBookId, childrensBookId]
+      [content, score, userId, nfBookISBN, fictionBookISBN, graphicBookISBN, bookClubBookISBN, childrensBookISBN, isInappropriate, isNotAccurate]
     );
 
     return review;
