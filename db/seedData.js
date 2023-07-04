@@ -210,8 +210,6 @@ async function createInitialNFBooks() {
     
     await createNFBook(9780143117001, 'Collapse: How Societies Choose to Fail or Succeed', 'Jared Diamond', 'History', 'Explores the reasons why some societies have collapsed throughout history.', 'Penguin Books', 2005, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+993509844_140.jpg?allowDefault=false&client=WorldcatOrgUI', '608 p.'),
     
-    await createNFBook(9781400052189, 'The Immortal Life of Henrietta Lacks', 'Rebecca Skloot', 'Science', 'Examines the impact of Henrietta Lacks\'s cells on medical research and the ethical questions surrounding their use.', 'Crown Publishing Group', 2010, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+217112401_140.jpg?allowDefault=false&client=WorldcatOrgUI', '381 p.'),
-    
     await createNFBook(9781400063512, 'The Black Swan: The Impact of the Highly Improbable', 'Nassim Nicholas Taleb', 'Statistics', 'Explores the role of rare and unpredictable events in shaping our world.', 'Random House', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+52988362_140.jpg?allowDefault=false&client=WorldcatOrgUI', '444 p.'),
     
     await createNFBook(9780393609394, 'Astrophysics for People in a Hurry', 'Neil deGrasse Tyson', 'Science', 'Provides a concise and accessible introduction to the fundamental concepts of astrophysics.', 'W. W. Norton & Company', 2017, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+906533404_140.jpg?allowDefault=false&client=WorldcatOrgUI', '222 p.'),
@@ -415,8 +413,6 @@ async function createInitialChildrensBooks() {
     await createChildrensBook(9780064400558, 'Charlotte\'s Web', 'E.B. White', 'Garth Williams', 'Chapter Book', 'Follows the unlikely friendship between a pig named Wilbur and a spider named Charlotte, who works to save Wilbur from being slaughtered.', 'Puffin Books', 1952, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+2880476766_140.jpg?allowDefault=false&client=WorldcatOrgUI', 'Ages 8-12', '184p.'),
     
     await createChildrensBook(9780593527498, 'Matilda', 'Roald Dahl', 'Quentin Blake', 'Chapter Book', 'Tells the story of a brilliant young girl named Matilda who develops telekinetic powers and uses them to overcome obstacles.', 'Puffin Books', 1988, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+993690014_140.jpg?allowDefault=false&client=WorldcatOrgUI', 'Ages 8-12', '240p.'),
-    
-    await createChildrensBook(9780064471046, 'The Lion, the Witch and the Wardrobe', 'C.S. Lewis', 'Pauline Baynes', 'Chapter Book', 'Follows the adventures of four siblings who enter the magical world of Narnia through a wardrobe and help defeat an evil witch.', 'HarperCollins', 1950, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+2308846876_140.jpg?allowDefault=false&client=WorldcatOrgUI', 'Ages 8-12', '208p.'),
     
     await createChildrensBook(9780312367541, 'A Wrinkle in Time', 'Madeleine L\'Engle', 'Ellen Raskin', 'Chapter Book', 'Follows the adventures of Meg Murry and her younger brother as they travel through space and time to rescue their father.', 'Square Fish', 1962, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+1107103756_140.jpg?allowDefault=false&client=WorldcatOrgUI', 'Ages 8-12', '232p.'),
     
