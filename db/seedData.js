@@ -224,9 +224,8 @@ async function createInitialNFBooks() {
     
     await createNFBook(9780739461624, 'The World Is Flat: A Brief History of the Twenty-first Century', 'Thomas L. Friedman', 'Business', 'Examines globalization and its impact on the world economy and society.', 'Picador', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+129460653_140.jpg?allowDefault=false&client=WorldcatOrgUI', '660 p.'),
     
-    await createNFBook(9780143038580, 'The Omnivore\'s Dilemma: A Natural History of Four Meals', 'Michael Pollan', 'Food', 'Explores the complex relationships between food, agriculture, and the environment.', 'Penguin Books', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+48154771_140.jpg?allowDefault=false&client=WorldcatOrgUI', '464 p.'),
+    await createNFBook(9780143038580, 'The Omnivore\'s Dilemma: A Natural History of Four Meals', 'Michael Pollan', 'Food', 'Explores the complex relationships between food, agriculture, and the environment.', 'Penguin Books', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+48154771_140.jpg?allowDefault=false&client=WorldcatOrgUI', '464 p.')
     
-    await createNFBook(9780374533557, 'Thinking, Fast and Slow (Deckle Edge)', 'Daniel Kahneman', 'Psychology', 'An alternate edition of "Thinking, Fast and Slow" with deckle edge pages.', 'Farrar, Straus and Giroux', 2011, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+344575152_140.jpg?allowDefault=false&client=WorldcatOrgUI', '499 p.')
 
     const allCreatedNFBooks = await getAllNFBooks();
     console.log("All NF Books: ", allCreatedNFBooks);
