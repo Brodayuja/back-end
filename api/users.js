@@ -12,6 +12,17 @@ const {
 
 const jwt = require("jsonwebtoken");
 
+usersRouter.get("/:id", async (req, res) => {
+  try {
+    console.log(req.params.id)
+    const userId = Number(req.params.id);
+    const response = await getUserById(userId)
+    res.send(response);
+  } catch (error) {
+    throw error;
+  }
+})
+
 usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await getAllUsers();
@@ -51,6 +62,7 @@ usersRouter.post("/login", async (req, res, next) => {
       res.send({
         message: "you're logged in!",
         token,
+        id: user.id,
       });
     } else {
       next({
@@ -110,6 +122,7 @@ usersRouter.post("/register", async (req, res, next) => {
     res.send({
       message: "thank you for signing up",
       token,
+      id: user.id,
     });
   } catch (error) {
     console.log(error);
@@ -127,6 +140,7 @@ usersRouter.put("/:id", async (req, res) => {
     throw error;
   }
 });
+
 
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
