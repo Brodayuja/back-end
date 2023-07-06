@@ -124,7 +124,8 @@ const createTables = async () => {
           "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"(isbn),
           "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn),
           "isInappropriate" BOOLEAN DEFAULT false,
-          "isNotAccurate" BOOLEAN DEFAULT false
+          "isNotAccurate" BOOLEAN DEFAULT false,
+          comment VARCHAR(1000)
         )`);
         await client.query(`
         CREATE TABLE reports (

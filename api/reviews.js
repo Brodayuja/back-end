@@ -22,15 +22,41 @@ reviewsRouter.get("/:id", async (req, res, next) => {
     });
 
 
-reviewsRouter.post("/", async (req, res, next) => {
-  try {
-    console.log(req.body);
-    const newReview = await createReview(req.body);
-    res.send(newReview);
-  } catch (error) {
-    next(error);
-  }
-});
+    reviewsRouter.post("/", async (req, res, next) => {
+      try {
+        const {
+          content,
+          score,
+          userId,
+          nfBookISBN,
+          fictionBookISBN,
+          graphicBookISBN,
+          bookClubBookISBN,
+          childrensBookISBN,
+          isInappropriate,
+          isNotAccurate,
+          comment,
+        } = req.body;
+    
+        const newReview = await createReview(
+          content,
+          score,
+          userId,
+          nfBookISBN,
+          fictionBookISBN,
+          graphicBookISBN,
+          bookClubBookISBN,
+          childrensBookISBN,
+          isInappropriate,
+          isNotAccurate,
+          comment
+        );
+    
+        res.send(newReview);
+      } catch (error) {
+        next(error);
+      }
+    });
 
 reviewsRouter.delete("/:id", async (req, res, next) => {
   try {

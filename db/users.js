@@ -62,6 +62,7 @@ async function getAllUsers() {
 
 async function getUserByUsername(userName) {
   // first get the user
+  console.log(userName);
   try {
     const { rows } = await client.query(
       `
@@ -71,6 +72,7 @@ async function getUserByUsername(userName) {
     `,
       [userName]
     );
+
     // if it doesn't exist, return null
     if (!rows || !rows.length) return null;
     // if it does:
@@ -85,17 +87,17 @@ async function getUserByUsername(userName) {
 
 async function getUser(username, password) {
   if (!username || !password) {
+    console.log("no username and/or password in first section of getUser");
     return;
   }
 
   try {
     const user = await getUserByUsername(username);
-
+    console.log(user);
     if (!user) return;
     const hashedPassword = user.password;
-    console.log(user.password);
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
-    console.log(passwordsMatch);
+
     if (!passwordsMatch) return;
     delete user.password;
     return user;
