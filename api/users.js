@@ -12,6 +12,17 @@ const {
 
 const jwt = require("jsonwebtoken");
 
+usersRouter.get("/:id", async (req, res) => {
+  try {
+    console.log(req.params.id)
+    const userId = Number(req.params.id);
+    const response = await getUserById(userId)
+    res.send(response);
+  } catch (error) {
+    throw error;
+  }
+})
+
 usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await getAllUsers();
@@ -24,7 +35,7 @@ usersRouter.get("/", async (req, res, next) => {
 
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body.user;
-  console.log(req.body.user);
+
   // request must have both
   if (!username || !password) {
     next({
@@ -32,12 +43,11 @@ usersRouter.post("/login", async (req, res, next) => {
       message: "Please supply both a username and password",
     });
   }
-
+  console.log(req.body.user);
   try {
     const user = await getUser(username, password);
 
     if (user) {
-      console.log(user);
       const token = jwt.sign(
         {
           id: user.id,
@@ -48,11 +58,11 @@ usersRouter.post("/login", async (req, res, next) => {
           expiresIn: "1w",
         }
       );
-      console.log(token);
 
       res.send({
         message: "you're logged in!",
         token,
+        id: user.id,
       });
     } else {
       next({
@@ -112,6 +122,7 @@ usersRouter.post("/register", async (req, res, next) => {
     res.send({
       message: "thank you for signing up",
       token,
+      id: user.id,
     });
   } catch (error) {
     console.log(error);
@@ -129,6 +140,7 @@ usersRouter.put("/:id", async (req, res) => {
     throw error;
   }
 });
+
 
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
