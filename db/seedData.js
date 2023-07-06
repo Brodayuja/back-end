@@ -271,8 +271,6 @@ async function createInitialFictionBooks() {
     await createFictionBook(9780274808328, 'The Da Vinci Code', 'Dan Brown', 'Thriller', 'A fast-paced thriller that combines art, religion, and secret societies as a symbologist races to uncover a hidden secret.', 'Anchor', 2003, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+481982394_140.jpg?allowDefault=false&client=WorldcatOrgUI', '489 p.'),
    
     await createFictionBook(9780345803788, 'Crazy Rich Asians', 'Kevin Kwan', 'Contemporary Fiction', 'Explores the lives of wealthy Chinese families in Singapore and the clash between old money and new money.', 'Anchor', 2013, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+1727109966_140.jpg?allowDefault=false&client=WorldcatOrgUI', '527 p.'),
-  
-    await createFictionBook(9780141439570, 'The Picture of Dorian Gray', 'Oscar Wilde', 'Classics', 'A philosophical novel that tells the story of a young man who remains eternally youthful while a portrait of him ages and reflects his moral corruption.', 'Penguin Classics', 1890, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+300521212_140.jpg?allowDefault=false&client=WorldcatOrgUI', '176 p.'),
    
     await createFictionBook(9780142001745, 'The Secret Life of Bees', 'Sue Monk Kidd', 'Historical Fiction', 'Set in 1960s South Carolina, this novel follows a young girl who escapes her troubled life and finds solace in the company of beekeeping sisters.', 'Penguin Books', 2002, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+6598879366_140.jpg?allowDefault=false&client=WorldcatOrgUI', '336 p.'),
    
@@ -360,7 +358,9 @@ async function createInitialBookClubBooks() {
     await createBookClubPicksBook(9780345804327, 'The Underground Railroad', 'Colson Whitehead', 'Historical Fiction', 'Reimagines the Underground Railroad as a literal underground railway system as Cora, a young slave, escapes from a Georgia plantation and seeks freedom.', 'Doubleday', 2016, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+7028837386_140.jpg?allowDefault=false&client=WorldcatOrgUI', '306 p.'),
     
     await createBookClubPicksBook(9781400032716, 'The Curious Incident of the Dog in the Night-Time', 'Mark Haddon', 'Mystery', 'Narrated by an autistic teenager named Christopher, this novel follows his investigation into the death of a neighborhood dog and his journey of self-discovery.', 'Vintage Contemporaries', 2003, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+1108254176_140.jpg?allowDefault=false&client=WorldcatOrgUI', '240 p.'),
-        
+    
+    await createBookClubPicksBook(9780141439570, 'The Picture of Dorian Gray', 'Oscar Wilde', 'Classics', 'A philosophical novel that tells the story of a young man who remains eternally youthful while a portrait of him ages and reflects his moral corruption.', 'Penguin Classics', 1890, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+082818528_140.jpg?allowDefault=false&client=WorldcatOrgUI', '272 p.'),
+    
     await createBookClubPicksBook(9781400052189, 'The Immortal Life of Henrietta Lacks', 'Rebecca Skloot', 'Non-fiction', 'Explores the story of Henrietta Lacks, an African American woman whose cells were unknowingly used for medical research and became instrumental in numerous scientific breakthroughs.', 'Broadway Books', 2010, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+578095732_140.jpg?allowDefault=false&client=WorldcatOrgUI', '381 p.'),
     
     await createBookClubPicksBook(9780553381689, 'A Game of Thrones', 'George R.R. Martin', 'Fantasy', 'The first book in the epic fantasy series "A Song of Ice and Fire," it introduces a complex world of political intrigue, power struggles, and battles for the Iron Throne.', 'Bantam', 1996, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+493937544_140.jpg?allowDefault=false&client=WorldcatOrgUI', '694 p.'),
