@@ -2,15 +2,6 @@ const express = require("express");
 const bookClubBooksRouter = express.Router();
 const { createBookClubPicksBook, getAllBookClubPicksBooks, getAllBookClubPicksBooksByISBN, updateBookClubPicksBook, destroyBookClubPicksBook } = require("../db/bookClubBooks.js");
 
-bookClubBooksRouter.get("/", async (req, res, next) => {
-  try {
-    const allBookClubPicks = await getAllBookClubPicksBooks()
-    res.send(allBookClubPicks);
-  } catch (error) {
-    next(error);
-  }
-});
-
 bookClubBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
@@ -21,6 +12,14 @@ bookClubBooksRouter.get("/:isbn", async (req, res, next) => {
     }
     });
 
+bookClubBooksRouter.get("/", async (req, res, next) => {
+  try {
+    const allBookClubPicks = await getAllBookClubPicksBooks()
+    res.send(allBookClubPicks);
+  } catch (error) {
+    next(error);
+  }
+});
 
 bookClubBooksRouter.post("/", async (req, res, next) => {
   try {

@@ -2,15 +2,6 @@ const express = require("express");
 const fictionBooksRouter = express.Router();
 const {createFictionBook, getAllFictionBooks, getAllFictionBooksByISBN, updateFictionBook, destroyFictionBook } = require("../db/fictionBooks.js");
 
-fictionBooksRouter.get("/", async (req, res, next) => {
-  try {
-    const allFictionBooks = await getAllFictionBooks()
-    res.send(allFictionBooks);
-  } catch (error) {
-    next(error);
-  }
-});
-
 fictionBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
@@ -20,6 +11,15 @@ fictionBooksRouter.get("/:isbn", async (req, res, next) => {
       next (error)
     }
     });
+
+fictionBooksRouter.get("/", async (req, res, next) => {
+  try {
+    const allFictionBooks = await getAllFictionBooks()
+    res.send(allFictionBooks);
+  } catch (error) {
+    next(error);
+  }  
+});  
 
 
 fictionBooksRouter.post("/", async (req, res, next) => {

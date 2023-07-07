@@ -2,15 +2,6 @@ const express = require("express");
 const graphicBooksRouter = express.Router();
 const { createGraphicNovelBook, getAllGraphicNovelBooks, getAllGraphicNovelBooksByISBN, updateGraphicNovelBook, destroyGraphicNovelBook } = require("../db/graphicBooks.js");
 
-graphicBooksRouter.get("/", async (req, res, next) => {
-  try {
-    const allGraphicBooks = await getAllGraphicNovelBooks()
-    res.send(allGraphicBooks);
-  } catch (error) {
-    next(error);
-  }
-});
-
 graphicBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
@@ -20,6 +11,15 @@ graphicBooksRouter.get("/:isbn", async (req, res, next) => {
       next (error)
     }
     });
+
+graphicBooksRouter.get("/", async (req, res, next) => {
+  try {
+    const allGraphicBooks = await getAllGraphicNovelBooks()
+    res.send(allGraphicBooks);
+  } catch (error) {
+    next(error);
+  }  
+});  
 
 
 graphicBooksRouter.post("/", async (req, res, next) => {

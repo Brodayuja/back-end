@@ -2,15 +2,6 @@ const express = require("express");
 const nfBooksRouter = express.Router();
 const {createNFBook, getAllNFBooks, getAllNFBooksByISBN, updateNFBook, destroyNFBook } = require("../db/nfBooks.js");
 
-nfBooksRouter.get("/", async (req, res, next) => {
-  try {
-    const allNFBooks = await getAllNFBooks()
-    res.send(allNFBooks);
-  } catch (error) {
-    next(error);
-  }
-});
-
 nfBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
@@ -21,6 +12,14 @@ nfBooksRouter.get("/:isbn", async (req, res, next) => {
     }
     });
 
+nfBooksRouter.get("/", async (req, res, next) => {
+  try {
+    const allNFBooks = await getAllNFBooks()
+    res.send(allNFBooks);
+  } catch (error) {
+    next(error);
+  }  
+});  
 
 nfBooksRouter.post("/", async (req, res, next) => {
   try {
