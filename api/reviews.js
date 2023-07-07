@@ -2,15 +2,6 @@ const express = require("express");
 const reviewsRouter = express.Router();
 const { createReview, getAllReviews, getReviewsByUserId, updateReview, destroyReview } = require("../db/reviews.js");
 
-reviewsRouter.get("/", async (req, res, next) => {
-  try {
-    const allReviews = await getAllReviews()
-    res.send(allReviews);
-  } catch (error) {
-    next(error);
-  }
-});
-
 reviewsRouter.get("/:id", async (req, res, next) => {
     try {
       console.log(req.params.id)
@@ -21,42 +12,50 @@ reviewsRouter.get("/:id", async (req, res, next) => {
     }
     });
 
+reviewsRouter.get("/", async (req, res, next) => {
+  try {
+    const allReviews = await getAllReviews()
+    res.send(allReviews);
+  } catch (error) {
+    next(error);
+  }  
+});  
 
-    reviewsRouter.post("/", async (req, res, next) => {
-      try {
-        const {
-          content,
-          score,
-          userId,
-          nfBookISBN,
-          fictionBookISBN,
-          graphicBookISBN,
-          bookClubBookISBN,
-          childrensBookISBN,
-          isInappropriate,
-          isNotAccurate,
-          comment,
-        } = req.body;
-    
-        const newReview = await createReview(
-          content,
-          score,
-          userId,
-          nfBookISBN,
-          fictionBookISBN,
-          graphicBookISBN,
-          bookClubBookISBN,
-          childrensBookISBN,
-          isInappropriate,
-          isNotAccurate,
-          comment
-        );
-    
-        res.send(newReview);
-      } catch (error) {
-        next(error);
-      }
-    });
+reviewsRouter.post("/", async (req, res, next) => {
+  try {
+    const {
+      content,
+      score,
+      userId,
+      nfBookISBN,
+      fictionBookISBN,
+      graphicBookISBN,
+      bookClubBookISBN,
+      childrensBookISBN,
+      isInappropriate,
+      isNotAccurate,
+      comment,
+    } = req.body;
+
+    const newReview = await createReview(
+      content,
+      score,
+      userId,
+      nfBookISBN,
+      fictionBookISBN,
+      graphicBookISBN,
+      bookClubBookISBN,
+      childrensBookISBN,
+      isInappropriate,
+      isNotAccurate,
+      comment
+    );
+
+    res.send(newReview);
+  } catch (error) {
+    next(error);
+  }
+});
 
 reviewsRouter.delete("/:id", async (req, res, next) => {
   try {

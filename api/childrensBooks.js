@@ -2,15 +2,6 @@ const express = require("express");
 const childrensBooksRouter = express.Router();
 const { createChildrensBook, getAllChildrensBooks, getAllChildrensBooksByISBN, updateChildrensBook, destroyChildrensBook } = require("../db/childrensBooks.js");
 
-childrensBooksRouter.get("/", async (req, res, next) => {
-  try {
-    const allChildrensBooks = await getAllChildrensBooks()
-    res.send(allChildrensBooks);
-  } catch (error) {
-    next(error);
-  }
-});
-
 childrensBooksRouter.get("/:isbn", async (req, res, next) => {
     try {
       console.log(req.params.isbn)
@@ -21,6 +12,14 @@ childrensBooksRouter.get("/:isbn", async (req, res, next) => {
     }
     });
 
+childrensBooksRouter.get("/", async (req, res, next) => {
+  try {
+    const allChildrensBooks = await getAllChildrensBooks()
+    res.send(allChildrensBooks);
+  } catch (error) {
+    next(error);
+  }
+});
 
 childrensBooksRouter.post("/", async (req, res, next) => {
   try {
