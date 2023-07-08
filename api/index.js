@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
+const {getUserById} = require("../db/users")
 
 router.get('/health', async (req, res, next)=>{
     try {
@@ -77,5 +78,9 @@ router.use('/book-club-picks', bookClubBooksRouter);
 //ROUTER: /api/childrens-books
 const childrensBooksRouter = require('./childrensBooks');
 router.use('/childrens-books', childrensBooksRouter);
+
+//ROUTER: /api/allbooks
+const allBooksRouter = require('./allbooks');
+router.use('/allbooks', allBooksRouter);
 
 module.exports = router;

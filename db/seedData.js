@@ -6,6 +6,7 @@ const { createGraphicNovelBook, getAllGraphicNovelBooks } = require("./graphicBo
 const { createBookClubPicksBook, getAllBookClubPicksBooks } = require("./bookClubBooks")
 const { createChildrensBook, getAllChildrensBooks } = require("./childrensBooks")
 const { createReview, getAllReviews } = require("./reviews");
+const { createAllBooks, getAllBooks } = require("./allBooks");
 
 async function dropTables() {
   console.log("Dropping Tables");
@@ -18,13 +19,13 @@ async function dropTables() {
       DROP TABLE IF EXISTS "bookClubPicksBooks";
       DROP TABLE IF EXISTS "childrensBooks";
       DROP TABLE IF EXISTS users;
+      DROP TABLE IF EXISTS allbooks;
     `);
     console.log("Finished Dropping Tables.");
   } catch (error) {
     throw error;
   }
 }
-
 
 const createTables = async () => {
     try {
@@ -158,6 +159,7 @@ const createTables = async () => {
           "isOwner" BOOLEAN REFERENCES users(is_owner),
           content TEXT NOT NULL
         )`);
+        
         console.log("Finished creating tables.")
     } catch (error) {
         console.log(error)
@@ -457,6 +459,73 @@ async function createInitialReviews() {
     }
 }
 
+const createAllBooksTable = async () => {
+  try {
+    console.log("!!!! ALL BOOKS")
+    await client.query(`
+    CREATE TABLE allbooks(
+        id SERIAL PRIMARY KEY,
+        isbn BIGINT NOT NULL UNIQUE,
+        title VARCHAR(255) NOT NULL,
+        author VARCHAR(255) NOT NULL,
+        artist VARCHAR(255),
+        illustrator VARCHAR(255),
+        genre VARCHAR(255) NOT NULL,
+        summary TEXT,
+        publisher VARCHAR(500),
+        "yearPublished" INT NOT NULL,
+        "bookCover" VARCHAR(2083),
+        audience VARCHAR(255),
+        "physicalDescription" TEXT,
+        booktype VARCHAR(255) NOT NULL
+    )`);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function allBooksInsert() {
+  try {
+    // Insert data from nfBooks into allbooks
+ await client.query(`
+ INSERT INTO allbooks (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", booktype)
+ SELECT isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", 'nfBooks'
+ FROM "nfBooks"
+`);
+
+// Insert data from fictionBooks into allbooks
+await client.query(`
+ INSERT INTO allbooks (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", booktype)
+ SELECT isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", 'fictionBooks'
+ FROM "fictionBooks"
+`);
+
+// Insert data from graphicNovelsAndMangaBooks into allbooks
+await client.query(`
+ INSERT INTO allbooks (isbn, title, author, artist, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", booktype)
+ SELECT isbn, title, author, artist, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", 'graphicNovelsAndMangaBooks'
+ FROM "graphicNovelsAndMangaBooks"
+`);
+
+// Insert data from bookClubPicksBooks into allbooks
+await client.query(`
+ INSERT INTO allbooks (isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", booktype)
+ SELECT isbn, title, author, genre, summary, publisher, "yearPublished", "bookCover", "physicalDescription", 'bookClubPicksBooks'
+ FROM "bookClubPicksBooks"
+`);
+
+// Insert data from childrensBooks into allbooks
+await client.query(`
+ INSERT INTO allbooks (isbn, title, author, illustrator, genre, summary, publisher, "yearPublished", "bookCover", audience, "physicalDescription", booktype)
+ SELECT isbn, title, author, illustrator, genre, summary, publisher, "yearPublished", "bookCover", audience, "physicalDescription", 'childrensBooks'
+ FROM "childrensBooks"
+`);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 async function rebuildDB() {
     try {
         console.log("Starting to rebuild DB.")
@@ -471,6 +540,8 @@ async function rebuildDB() {
         await createInitialBookClubBooks()
         await createInitialChildrensBooks()
         await createInitialReviews()
+        await createAllBooksTable()
+        await allBooksInsert()
 
         console.log("Finished rebuilding DB.")
 

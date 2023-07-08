@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken");
 
 usersRouter.get("/:id", async (req, res) => {
   try {
-    console.log(req.params.id)
+    
     const userId = Number(req.params.id);
     const response = await getUserById(userId)
     res.send(response);
@@ -43,7 +43,7 @@ usersRouter.post("/login", async (req, res, next) => {
       message: "Please supply both a username and password",
     });
   }
-  console.log(req.body.user);
+  
   try {
     const user = await getUser(username, password);
 
@@ -71,8 +71,7 @@ usersRouter.post("/login", async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    // next(error);
+    next(error);
   }
 });
 
@@ -131,7 +130,7 @@ usersRouter.post("/register", async (req, res, next) => {
 
 usersRouter.put("/:id", async (req, res) => {
   try {
-    console.log(req.params.id);
+    
     const userId = Number(req.params.id);
     const updatedData = req.body;
     const NewlyUpdatedUser = await updateUser(userId, updatedData);
@@ -144,7 +143,7 @@ usersRouter.put("/:id", async (req, res) => {
 
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
-    console.log(req.params.id);
+    
     const deletedUser = await destroyUser(Number(req.params.id));
     res.send(deletedUser);
   } catch (error) {

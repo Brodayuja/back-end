@@ -4,7 +4,7 @@ const { createReview, getAllReviews, getReviewsByUserId, updateReview, destroyRe
 
 reviewsRouter.get("/:id", async (req, res, next) => {
     try {
-      console.log(req.params.id)
+      
       const singleReview = await getReviewsByUserId(Number(req.params.id))
       res.send(singleReview)
     } catch (error) {
@@ -59,7 +59,7 @@ reviewsRouter.post("/", async (req, res, next) => {
 
 reviewsRouter.delete("/:id", async (req, res, next) => {
   try {
-    console.log(req.params.id)
+    
     const deletedReview = await destroyReview(Number(req.params.id))
     res.send(deletedReview)
   } catch (error) {
@@ -69,7 +69,7 @@ reviewsRouter.delete("/:id", async (req, res, next) => {
 
 reviewsRouter.put("/:id", async (req, res) => {
   try {
-    console.log(req.params.id)
+    
     const reviewId = Number(req.params.id)
     const updatedData = req.body
     const NewlyUpdatedReview = await updateReview(reviewId, updatedData)
