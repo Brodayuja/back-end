@@ -11,6 +11,7 @@ async function createReview(content, score, userId, nfBookISBN, fictionBookISBN,
       [content, score, userId, nfBookISBN, fictionBookISBN, graphicBookISBN, bookClubBookISBN, childrensBookISBN, isInappropriate, isNotAccurate, comment]
     );
 
+    
     return review;
   } catch (error) {
     throw error;
