@@ -24,9 +24,14 @@ fictionBooksRouter.get("/", async (req, res, next) => {
 
 fictionBooksRouter.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
+    console.log(req.body, "***");
     const newFictionBook = await createFictionBook(req.body);
-    res.send(newFictionBook);
+    console.log(newFictionBook, "&&&&")
+
+    if (newFictionBook) {
+      res.send(newFictionBook);
+
+    } else {res.send({message: "There was an error in adding this book."})}
   } catch (error) {
     next(error);
   }

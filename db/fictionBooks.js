@@ -1,6 +1,6 @@
 const client = require("./index");
 
-async function createFictionBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
+async function createFictionBook ({ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription}) {
   try {
     const {rows: [bookFic]} = await client.query(
       `
