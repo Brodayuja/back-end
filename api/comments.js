@@ -31,7 +31,6 @@ commentsRouter.post("/", async (req, res, next) => {
     } = req.body;
 
     const newComment = await createComments(
-      content,
       userid,
       content,
       username,
