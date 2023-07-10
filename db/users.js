@@ -12,7 +12,8 @@ async function createUser(
   website,
   favoriteBooks,
   aboutMe,
-  isAdmin
+  isAdmin,
+  myComments
 ) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   console.log("is hashPassword working?", hashedPassword);
@@ -21,8 +22,8 @@ async function createUser(
       rows: [user],
     } = await client.query(
       `
-    INSERT INTO users (name, username, password, email, avatar, location, website, "favoriteBooks", "aboutMe", "is_admin")
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    INSERT INTO users (name, username, password, email, avatar, location, website, "favoriteBooks", "aboutMe", "is_admin", my_comments)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING *;
     `,
       [
@@ -36,6 +37,7 @@ async function createUser(
         favoriteBooks,
         aboutMe,
         isAdmin,
+        myComments
       ]
     );
     console.log("is query working?", user);

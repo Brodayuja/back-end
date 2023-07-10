@@ -48,6 +48,27 @@ async function getReviewsByUserId({userId}) {
   }
 }
 
+async function getReviewsById(reviewId) {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM reviews
+      WHERE id = $1;
+      `,
+      [reviewId]
+    );
+
+    if (rows.length === 0) {
+      throw new Error('Review not found');
+    }
+
+    return rows[0];
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateReview(id, fields = {}) {
   // build the set string 
   const fieldsKeys = Object.keys(fields)
@@ -97,6 +118,7 @@ module.exports = {
   createReview,
   getAllReviews,
   getReviewsByUserId,
+  getReviewsById,
   updateReview,
   destroyReview
 };

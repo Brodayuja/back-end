@@ -87,6 +87,7 @@ usersRouter.post("/register", async (req, res, next) => {
     favoriteBooks,
     aboutMe,
     isAdmin,
+    myComments,
   } = req.body;
 
   try {
