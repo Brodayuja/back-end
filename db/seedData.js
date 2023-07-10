@@ -6,12 +6,12 @@ const { createGraphicNovelBook, getAllGraphicNovelBooks } = require("./graphicBo
 const { createBookClubPicksBook, getAllBookClubPicksBooks } = require("./bookClubBooks")
 const { createChildrensBook, getAllChildrensBooks } = require("./childrensBooks")
 const { createReview, getAllReviews } = require("./reviews");
-const { createAllBooks, getAllBooks } = require("./allBooks");
 
 async function dropTables() {
   console.log("Dropping Tables");
   try {
     await client.query(`
+    DROP TABLE IF EXISTS comments;
       DROP TABLE IF EXISTS reviews;
       DROP TABLE IF EXISTS "nfBooks";
       DROP TABLE IF EXISTS "fictionBooks";
@@ -110,7 +110,8 @@ const createTables = async () => {
             "favoriteBooks" VARCHAR(255),
             "aboutMe" TEXT,
             is_admin BOOLEAN DEFAULT false,
-            is_owner BOOLEAN DEFAULT false
+            is_owner BOOLEAN DEFAULT false,
+            my_comments VARCHAR[]
         )`);
         await client.query(`
     
@@ -525,6 +526,32 @@ await client.query(`
   }
 }
 
+const createCommentsTable = async () => {
+  try {
+    await client.query(`
+    CREATE TABLE comments(
+        id SERIAL PRIMARY KEY,
+        userid INT NOT NULL UNIQUE,
+        content TEXT NOT NULL,
+        username VARCHAR(255) NOT NULL,
+        reviewid INT REFERENCES reviews(id)
+    )`);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function createInitialComments() {
+  try {
+    await client.query(`
+      INSERT INTO comments (userid, content, username, reviewid)
+      VALUES (2, 'Great book', 'testUser2', 1)
+    `);
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 async function rebuildDB() {
     try {
@@ -542,6 +569,8 @@ async function rebuildDB() {
         await createInitialReviews()
         await createAllBooksTable()
         await allBooksInsert()
+        await createCommentsTable()
+        await createInitialComments()
 
         console.log("Finished rebuilding DB.")
 

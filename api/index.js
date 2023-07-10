@@ -83,4 +83,8 @@ router.use('/childrens-books', childrensBooksRouter);
 const allBooksRouter = require('./allbooks');
 router.use('/allbooks', allBooksRouter);
 
+//ROUTER: /api/comments
+const commentsRouter = require('./comments');
+router.use('/comments', commentsRouter);
+
 module.exports = router;

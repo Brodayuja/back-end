@@ -1,11 +1,11 @@
 const express = require("express");
 const reviewsRouter = express.Router();
-const { createReview, getAllReviews, getReviewsByUserId, updateReview, destroyReview } = require("../db/reviews.js");
+const { createReview, getAllReviews, getReviewsById, updateReview, destroyReview, patchReview } = require("../db/reviews.js");
 
 reviewsRouter.get("/:id", async (req, res, next) => {
     try {
       
-      const singleReview = await getReviewsByUserId(Number(req.params.id))
+      const singleReview = await getReviewsById(Number(req.params.id))
       res.send(singleReview)
     } catch (error) {
       next (error)
@@ -78,5 +78,16 @@ reviewsRouter.put("/:id", async (req, res) => {
     throw (error)
   }
 });
+
+reviewsRouter.use("/:id", async (req, res)=> {
+  try {
+    const reviewId = Number(req.params.id)
+    const updatedData = req.body
+    const newComment = await patchReview(reviewId, updatedData)
+    res.send(newComment)
+  } catch (error) {
+    throw(error)
+  }
+})
 
 module.exports = reviewsRouter;
