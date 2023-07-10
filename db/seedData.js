@@ -1585,7 +1585,7 @@ const createCommentsTable = async () => {
     await client.query(`
     CREATE TABLE comments(
         id SERIAL PRIMARY KEY,
-        userid INT NOT NULL UNIQUE,
+        userid INT NOT NULL,
         content TEXT NOT NULL,
         username VARCHAR(255) NOT NULL,
         reviewid INT REFERENCES reviews(id)
