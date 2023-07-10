@@ -14,14 +14,13 @@ const jwt = require("jsonwebtoken");
 
 usersRouter.get("/:id", async (req, res) => {
   try {
-    
     const userId = Number(req.params.id);
-    const response = await getUserById(userId)
+    const response = await getUserById(userId);
     res.send(response);
   } catch (error) {
     throw error;
   }
-})
+});
 
 usersRouter.get("/", async (req, res, next) => {
   try {
@@ -43,7 +42,7 @@ usersRouter.post("/login", async (req, res, next) => {
       message: "Please supply both a username and password",
     });
   }
-  
+
   try {
     const user = await getUser(username, password);
 
@@ -81,12 +80,12 @@ usersRouter.post("/register", async (req, res, next) => {
     username,
     password,
     email,
+    is_admin,
     avatar,
     location,
     website,
     favoriteBooks,
     aboutMe,
-    isAdmin,
     myComments,
   } = req.body;
 
@@ -105,7 +104,8 @@ usersRouter.post("/register", async (req, res, next) => {
       userObj.name,
       userObj.username,
       userObj.password,
-      userObj.email
+      userObj.email,
+      userObj.is_admin
     );
 
     const token = jwt.sign(
@@ -131,7 +131,6 @@ usersRouter.post("/register", async (req, res, next) => {
 
 usersRouter.put("/:id", async (req, res) => {
   try {
-    
     const userId = Number(req.params.id);
     const updatedData = req.body;
     const NewlyUpdatedUser = await updateUser(userId, updatedData);
@@ -141,10 +140,8 @@ usersRouter.put("/:id", async (req, res) => {
   }
 });
 
-
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
-    
     const deletedUser = await destroyUser(Number(req.params.id));
     res.send(deletedUser);
   } catch (error) {
