@@ -24,9 +24,9 @@ fictionBooksRouter.get("/", async (req, res, next) => {
 
 fictionBooksRouter.post("/", async (req, res, next) => {
   try {
-    console.log(req.body, "***");
-    const newFictionBook = await createFictionBook(req.body);
-    console.log(newFictionBook, "&&&&")
+    const {isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription} = req.body
+    
+    const newFictionBook = await createFictionBook(isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription);
 
     if (newFictionBook) {
       res.send(newFictionBook);

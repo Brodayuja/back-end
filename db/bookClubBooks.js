@@ -1,6 +1,6 @@
 const client = require("./index");
 
-async function createBookClubPicksBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
+async function createBookClubPicksBook (isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
     const {rows: [bookClub]} = await client.query(
       `
@@ -8,7 +8,7 @@ async function createBookClubPicksBook (ISBN, title, author, genre, summary, pub
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,
-      [ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
+      [isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
     );
 
     return bookClub
@@ -45,7 +45,7 @@ async function getAllBookClubPicksBooksByISBN(ISBN) {
   }
 }
 
-async function updateBookClubPicksBook(id, fields = {}) {
+async function updateBookClubPicksBook(isbn, fields = {}) {
   // build the set string 
   const fieldsKeys = Object.keys(fields)
   console.log(fieldsKeys, "fieldsKeys in update picks")
@@ -66,7 +66,7 @@ async function updateBookClubPicksBook(id, fields = {}) {
     const { rows: [ bookClub ] } = await client.query(`
       UPDATE "bookClubPicksBooks"
       SET ${ setString }
-      WHERE id=${ id }
+      WHERE isbn=${ isbn }
       RETURNING *;
     `, Object.values(fields));
 

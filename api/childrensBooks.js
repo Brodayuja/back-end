@@ -23,9 +23,15 @@ childrensBooksRouter.get("/", async (req, res, next) => {
 
 childrensBooksRouter.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
-    const newChildrensBook = await createChildrensBook(req.body);
-    res.send(newChildrensBook);
+    const {isbn, title, author, illustrator, genre, summary, publisher, yearPublished, bookCover, audience, physicalDescription} = req.body
+
+    const newChildrensBook = await createChildrensBook(isbn, title, author, illustrator, genre, summary, publisher, yearPublished, bookCover, audience, physicalDescription);
+
+    if (newChildrensBook) {
+      res.send(newChildrensBook);
+
+    } else {res.send({message: "There was an error in adding this book."})}
+
   } catch (error) {
     next(error);
   }

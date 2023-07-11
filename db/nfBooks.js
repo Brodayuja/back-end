@@ -1,6 +1,6 @@
 const client = require("./index");
 
-async function createNFBook (ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
+async function createNFBook (isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
     const {rows: [bookNF]} = await client.query(
       `
@@ -8,7 +8,7 @@ async function createNFBook (ISBN, title, author, genre, summary, publisher, yea
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,
-      [ISBN, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
+      [isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
     );
 
     return bookNF;
@@ -44,7 +44,7 @@ async function getAllNFBooksByISBN(ISBN) {
   }
 }
 
-async function updateNFBook(id, fields = {}) {
+async function updateNFBook(isbn, fields = {}) {
   // build the set string 
   const fieldsKeys = Object.keys(fields)
   console.log(fieldsKeys, "fieldsKeys in update nonfiction books")
@@ -65,7 +65,7 @@ async function updateNFBook(id, fields = {}) {
     const { rows: [ bookNF ] } = await client.query(`
       UPDATE "nfBooks"
       SET ${ setString }
-      WHERE id=${ id }
+      WHERE isbn=${ isbn }
       RETURNING *;
     `, Object.values(fields));
 
