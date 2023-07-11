@@ -21,11 +21,9 @@ async function getAllComments() {
   try {
     const {rows} = await client.query(
       `
-      SELECT comments.*, reviews.id AS "reviewid"
-      FROM comments
-      JOIN reviews ON comments."reviewid" = reviews.id"
-      WHERE "reviewid" = $1
-       `, [reviews.id]
+      SELECT *
+      FROM comments;
+       `
     );
 
     return rows;
@@ -34,7 +32,7 @@ async function getAllComments() {
   }
 }
 
-async function getAllCommentsById(comment_id) {
+async function getAllCommentsById(id) {
   try {
     const { rows } = await client.query(
       `
@@ -42,14 +40,35 @@ async function getAllCommentsById(comment_id) {
       FROM comments
       WHERE id = $1;
       `,
-      [comment_id]
+      [id]
     );
 
     if (rows.length === 0) {
       throw new Error('Review not found');
     }
 
-    return rows[0];
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllCommentsByReviewId(review_id) {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM comments
+      WHERE review_id = $1;
+      `,
+      [review_id]
+    );
+
+    if (rows.length === 0) {
+      throw new Error('Review not found');
+    }
+
+    return rows;
   } catch (error) {
     throw error;
   }
@@ -87,16 +106,15 @@ async function updateComments(id, fields = {}) {
   }
 }
 
-async function destroyComments() {
+async function destroyComments(id) {
   try {
     const {rows: [comment]} = await client.query(`
         DELETE FROM comments
         WHERE id = $1
         RETURNING *;
-    `, []);
-    if (rows.length) {
+    `, [id]);
+  
     return comment;
-  }
   } catch (error) {
     throw error;
   }
@@ -105,6 +123,7 @@ async function destroyComments() {
 module.exports = {
   createComments,
   getAllCommentsById,
+  getAllCommentsByReviewId,
   getAllComments,
   updateComments,
   destroyComments
