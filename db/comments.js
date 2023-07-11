@@ -32,6 +32,27 @@ async function getAllComments() {
   }
 }
 
+async function getAllCommentsById(id) {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM comments
+      WHERE id = $1;
+      `,
+      [id]
+    );
+
+    if (rows.length === 0) {
+      throw new Error('Review not found');
+    }
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getAllCommentsByReviewId(review_id) {
   try {
     const { rows } = await client.query(
@@ -85,16 +106,15 @@ async function updateComments(id, fields = {}) {
   }
 }
 
-async function destroyComments() {
+async function destroyComments(id) {
   try {
     const {rows: [comment]} = await client.query(`
         DELETE FROM comments
         WHERE id = $1
         RETURNING *;
-    `, []);
-    if (rows.length) {
+    `, [id]);
+  
     return comment;
-  }
   } catch (error) {
     throw error;
   }
@@ -102,6 +122,7 @@ async function destroyComments() {
 
 module.exports = {
   createComments,
+  getAllCommentsById,
   getAllCommentsByReviewId,
   getAllComments,
   updateComments,
