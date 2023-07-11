@@ -1,6 +1,6 @@
 const client = require("./index");
 
-async function createGraphicNovelBook (ISBN, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
+async function createGraphicNovelBook (isbn, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription) {
   try {
     const {rows: [bookGN]} = await client.query(
       `
@@ -8,7 +8,7 @@ async function createGraphicNovelBook (ISBN, title, author, artist, genre, summa
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *;
     `,
-      [ISBN, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
+      [isbn, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription]
     );
 
     return bookGN;
@@ -44,7 +44,7 @@ async function getAllGraphicNovelBooksByISBN(ISBN) {
   }
 }
 
-async function updateGraphicNovelBook(id, fields = {}) {
+async function updateGraphicNovelBook(isbn, fields = {}) {
   // build the set string 
   const fieldsKeys = Object.keys(fields)
   console.log(fieldsKeys, "fieldsKeys in update graphic books")
@@ -65,7 +65,7 @@ async function updateGraphicNovelBook(id, fields = {}) {
     const { rows: [ bookGN ] } = await client.query(`
       UPDATE "graphicNovelsAndMangaBooks"
       SET ${ setString }
-      WHERE id=${ id }
+      WHERE isbn=${ isbn }
       RETURNING *;
     `, Object.values(fields));
 

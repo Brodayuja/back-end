@@ -24,8 +24,13 @@ nfBooksRouter.get("/", async (req, res, next) => {
 nfBooksRouter.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
-    const newNFBook = await createNFBook(req.body);
-    res.send(newNFBook);
+    const {isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription } = req.body
+    
+    const newNFBook = await createNFBook(isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription);
+    
+    if (newNFBook) {
+      res.send(newNFBook);
+    } else {res.send({message: "There was an error in adding this book."})}
   } catch (error) {
     next(error);
   }

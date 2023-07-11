@@ -24,9 +24,13 @@ graphicBooksRouter.get("/", async (req, res, next) => {
 
 graphicBooksRouter.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
-    const newGraphicBook = await createGraphicNovelBook(req.body);
-    res.send(newGraphicBook);
+    const {isbn, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription} = req.body
+    
+    const newGraphicBook = await createGraphicNovelBook(isbn, title, author, artist, genre, summary, publisher, yearPublished, bookCover, physicalDescription);
+    
+    if (newGraphicBook) {
+      res.send(newGraphicBook)
+    } else {res.send({message: "There was an error in adding this book."})}
   } catch (error) {
     next(error);
   }

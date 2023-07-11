@@ -23,9 +23,13 @@ bookClubBooksRouter.get("/", async (req, res, next) => {
 
 bookClubBooksRouter.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
-    const newBookClubPick = await createBookClubPicksBook(req.body);
-    res.send(newBookClubPick);
+    const {isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription} = req.body
+    
+    const newBookClubPick = await createBookClubPicksBook(isbn, title, author, genre, summary, publisher, yearPublished, bookCover, physicalDescription);
+    
+    if (newBookClubPick) {
+      res.send(newBookClubPick);
+    } else {res.send({message: "There was an error in adding this book."})}
   } catch (error) {
     next(error);
   }
