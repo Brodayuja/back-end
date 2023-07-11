@@ -227,50 +227,6 @@ async function createInitialNFBooks() {
   try {
     console.log("Starting to create nonfiction books.");
 
-<<<<<<< HEAD
-    await createNFBook(9780393866704,"The Parrot and the Igloo: Climate and the Science of Denial", "David Lipsky", "Biographies", "A Goodreads Most Anticipated Book of 2023. A USA Today Must-Read Summer Book. A Next Big Idea Must-Read Book. A Library Journal What To Read In 2023 Book. The New York Times best-selling author explores how anti-science became so virulent in American life―through a history of climate denial and its consequences.", "W W Norton and Co, Inc", 2023, "https://coverart.oclc.org/ImageWebSvc/oclc/+-+2955661186_140.jpg?allowDefault=false&client=WorldcatOrgUI", "416 p.");
-    
-    await createNFBook (9780593242384, "Better Living Through Birding: Notes from a Black Man in the Natural World", "Christian Cooper", "Nonfiction", "Christian Cooper is a self-described Blerd (Black nerd), an avid comics fan, and an expert birder who devotes every spring to gazing upon the migratory birds that stop to rest in Central Park, just a subway ride away from where he lives in New York City. When birdwatching in the park one morning in May 2020, Cooper was engaged in the ritual that had been a part of his life since he was ten years old. But when a routine encounter with a dog-walker escalates age old racial tensions, Cooper's viral video of the incident would send shock waves through the nation. In Better Living Through Birding, Cooper tells the story of his extraordinary life leading up to the now-infamous encounter in Central Park and shows how a life spent looking up at the birds prepared him, in the most uncanny of ways, to be a gay, Black man in American today. From sharpened senses that work just as well in a protest as in a park, to what a bird like the Common Grackle can teach us about self-acceptance, Better Living Through Birding exults in the pleasures of a life lived in pursuit of the natural world and invites you to discover your own. Equal parts memoir, travelogue, and primer on the art of birding, this is Cooper's story of learning to claim and defend space for himself and others like him, from his days as a writer for Marvel Comics, where Cooper introduced the first gay storyline, to vivid and life-changing birding expeditions through Africa, Australia, the Americas and the Himalayas. Better Living Through Birding is Cooper's invitation into the wonderful world of birds, and what they can teach us about life, if only we would stop and listen.--Provided by publisher", "Random House", 2023, "https://coverart.oclc.org/ImageWebSvc/oclc/+-+4693611986_140.jpg?allowDefault=false&client=WorldcatOrgUI", "282 p."),
-    
-    await createNFBook(9780062316110, 'Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'History', 'A thought-provoking exploration of the history of Homo sapiens and the impact of human activities on the world.', 'Vintage', 2014, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+325120954_140.jpg?allowDefault=false&client=WorldcatOrgUI', '443 p.'),
-    
-    await createNFBook(9780374533557, 'Thinking, Fast and Slow', 'Daniel Kahneman', 'Psychology', 'A renowned psychologist explores the two systems of thinking that drive our judgments and decisions.', 'Farrar, Straus and Giroux', 2011, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+344575152_140.jpg?allowDefault=false&client=WorldcatOrgUI', '499 p.'),
-    
-    await createNFBook(9781476708706, 'The Innovators: How a Group of Hackers, Geniuses, and Geeks Created the Digital Revolution', 'Walter Isaacson', 'Technology', 'A captivating account of the people and innovations that shaped the digital age.', 'Simon & Schuster', 2014, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+585765123_140.jpg?allowDefault=false&client=WorldcatOrgUI', '542 p.'),
-    
-    await createNFBook(9798374637441, 'The Emperor of All Maladies: A Biography of Cancer', 'Siddhartha Mukherjee', 'Medicine', 'A comprehensive history of cancer that explores its impact on society and the ongoing quest for a cure.', 'Scribner', 2011, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+701493284_140.jpg?allowDefault=false&client=WorldcatOrgUI', '571 p.'),
-    
-    await createNFBook(9780307352156, 'Quiet: The Power of Introverts in a World That Can\'t Stop Talking', 'Susan Cain', 'Psychology', 'An insightful examination of introversion and its often overlooked strengths in a society that values extroversion.', 'Penguin Books', 2013, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+461831041_140.jpg?allowDefault=false&client=WorldcatOrgUI', '352 p.'),
-    
-    await createNFBook(9780393354324, 'Guns, Germs, and Steel: The Fates of Human Societies', 'Jared Diamond', 'Anthropology', 'A groundbreaking study of how geography and environmental factors shaped the course of human history.', 'W. W. Norton & Company', 1998, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+8030891966_140.jpg?allowDefault=false&client=WorldcatOrgUI', '496 p.'),
-    
-    await createNFBook(9780061234002, 'Freakonomics: A Rogue Economist Explores the Hidden Side of Everything', 'Steven D. Levitt, Stephen J. Dubner', 'Economics', 'An unconventional look at everyday life and the surprising connections between seemingly unrelated phenomena.', 'William Morrow Paperbacks', 2006, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+6124245066_140.jpg?allowDefault=false&client=WorldcatOrgUI', '315 p.'),
-    
-    await createNFBook(9780316010665, 'Blink: The Power of Thinking Without Thinking', 'Malcolm Gladwell', 'Psychology', 'Examines the power of intuition and rapid cognition in decision-making processes.', 'Back Bay Books', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+68742100_140.jpg?allowDefault=false&client=WorldcatOrgUI', '320 p.'),
-    
-    await createNFBook(9781476733524, 'The Gene: An Intimate History', 'Siddhartha Mukherjee', 'Science', 'A comprehensive exploration of genetics and the impact of genes on our lives.', 'Scribner', 2016, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+929117074_140.jpg?allowDefault=false&client=WorldcatOrgUI', '608 p.'),
-    
-    await createNFBook(9780553380163, 'A Brief History of Time', 'Stephen Hawking', 'Science', 'An accessible overview of cosmology and the nature of the universe.', 'Bantam', 1998, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+875575858_140.jpg?allowDefault=false&client=WorldcatOrgUI', '256 p.'),
-    
-    await createNFBook(9780066620992, 'Good to Great: Why Some Companies Make the Leap... and Others Don\'t', 'Jim Collins', 'Business', 'Identifies the factors that enable some companies to achieve sustained success.', 'HarperBusiness', 2001, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+10008319_140.jpg?allowDefault=false&client=WorldcatOrgUI', '400 p.'),
-    
-    await createNFBook(9780143117001, 'Collapse: How Societies Choose to Fail or Succeed', 'Jared Diamond', 'History', 'Explores the reasons why some societies have collapsed throughout history.', 'Penguin Books', 2005, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+993509844_140.jpg?allowDefault=false&client=WorldcatOrgUI', '608 p.'),
-    
-    await createNFBook(9781400063512, 'The Black Swan: The Impact of the Highly Improbable', 'Nassim Nicholas Taleb', 'Statistics', 'Explores the role of rare and unpredictable events in shaping our world.', 'Random House', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+52988362_140.jpg?allowDefault=false&client=WorldcatOrgUI', '444 p.'),
-    
-    await createNFBook(9780393609394, 'Astrophysics for People in a Hurry', 'Neil deGrasse Tyson', 'Science', 'Provides a concise and accessible introduction to the fundamental concepts of astrophysics.', 'W. W. Norton & Company', 2017, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+906533404_140.jpg?allowDefault=false&client=WorldcatOrgUI', '222 p.'),
-    
-    await createNFBook(9780063051331, 'Sapiens: A Graphic History: The Birth of Humankind', 'Yuval Noah Harari, David Vandermeulen, Daniel Casanave', 'History', 'A graphic adaptation of "Sapiens" that explores the history of Homo sapiens in an engaging format.', 'HarperVia', 2021, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+5981172966_140.jpg?allowDefault=false&client=WorldcatOrgUI', '528 p.'),
-    
-    await createNFBook(9780316346627, 'The Tipping Point: How Little Things Can Make a Big Difference', 'Malcolm Gladwell', 'Psychology', 'Explores the factors that contribute to social epidemics and the "tipping point" at which they occur.', 'Back Bay Books', 2002, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+72413000_140.jpg?allowDefault=false&client=WorldcatOrgUI', '301 p.'),
-    
-    await createNFBook(9780061792809, 'Freakonomics Rev Ed: A Rogue Economist Explores the Hidden Side of Everything', 'Steven D. Levitt, Stephen J. Dubner', 'Economics', 'An updated edition of "Freakonomics" that delves into the hidden side of various social and economic phenomena.', 'William Morrow Paperbacks', 2006, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+6124245066_140.jpg?allowDefault=false&client=WorldcatOrgUI', '336 p.'),
-    
-    await createNFBook(9780739461624, 'The World Is Flat: A Brief History of the Twenty-first Century', 'Thomas L. Friedman', 'Business', 'Examines globalization and its impact on the world economy and society.', 'Picador', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+129460653_140.jpg?allowDefault=false&client=WorldcatOrgUI', '660 p.'),
-    
-    await createNFBook(9780143038580, 'The Omnivore\'s Dilemma: A Natural History of Four Meals', 'Michael Pollan', 'Food', 'Explores the complex relationships between food, agriculture, and the environment.', 'Penguin Books', 2007, 'https://coverart.oclc.org/ImageWebSvc/oclc/+-+48154771_140.jpg?allowDefault=false&client=WorldcatOrgUI', '464 p.')
-    
-=======
     await createNFBook(
       9780393866704,
       "The Parrot and the Igloo: Climate and the Science of Denial",
@@ -503,7 +459,6 @@ async function createInitialNFBooks() {
         "https://coverart.oclc.org/ImageWebSvc/oclc/+-+48154771_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "464 p."
       );
->>>>>>> main
 
     const allCreatedNFBooks = await getAllNFBooks();
     console.log("All NF Books: ", allCreatedNFBooks);
