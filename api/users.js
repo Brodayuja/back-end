@@ -8,6 +8,7 @@ const {
   updateUser,
   destroyUser,
   getUser,
+  getUserByEmail,
 } = require("../db/users");
 
 const jwt = require("jsonwebtoken");

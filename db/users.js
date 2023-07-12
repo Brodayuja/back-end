@@ -87,6 +87,31 @@ async function getUserByUsername(userName) {
   }
 }
 
+async function getUserByEmail(email) {
+  // first get the user
+  console.log(email);
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM users
+      WHERE email = $1;
+    `,
+      [email]
+    );
+
+    // if it doesn't exist, return null
+    if (!rows || !rows.length) return null;
+    // if it does:
+    // delete the 'password' key from the returned object
+    const [user] = rows;
+    delete user.password;
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function getUser(username, password) {
   if (!username || !password) {
     console.log("no username and/or password in first section of getUser");
@@ -192,4 +217,5 @@ module.exports = {
   getUserByUsername,
   updateUser,
   destroyUser,
+  getUserByEmail,
 };
