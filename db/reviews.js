@@ -104,7 +104,7 @@ async function updateReview(id, fields = {}) {
 async function destroyReview(id) {
   try {
     const {rows: [review]} = await client.query(`
-        DELETE FROM review
+        DELETE FROM reviews
         WHERE id = $1
         RETURNING *;
     `, [id]);

@@ -129,11 +129,11 @@ const createTables = async () => {
           content VARCHAR(1000) NOT NULL,
           score INT NOT NULL,
           user_id INT REFERENCES users(id),
-          "nfBook_isbn" BIGINT REFERENCES "nfBooks"(isbn),
-          "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"(isbn),
-          "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"(isbn),
-          "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"(isbn),
-          "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn),
+          "nfBook_isbn" BIGINT REFERENCES "nfBooks"(isbn) ON DELETE CASCADE,
+          "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"(isbn) ON DELETE CASCADE,
+          "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"(isbn) ON DELETE CASCADE,
+          "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"(isbn) ON DELETE CASCADE,
+          "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn) ON DELETE CASCADE,
           "isInappropriate" BOOLEAN DEFAULT false,
           "isNotAccurate" BOOLEAN DEFAULT false,
           comment VARCHAR(1000)
@@ -1588,7 +1588,7 @@ const createCommentsTable = async () => {
         userid INT NOT NULL,
         content TEXT NOT NULL,
         username VARCHAR(255) NOT NULL,
-        reviewid INT REFERENCES reviews(id)
+        reviewid INT REFERENCES reviews(id) ON DELETE CASCADE
     )`);
   } catch (error) {
     console.log(error);
