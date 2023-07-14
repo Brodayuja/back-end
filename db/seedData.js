@@ -134,8 +134,8 @@ const createTables = async () => {
           "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"(isbn) ON DELETE CASCADE,
           "bookClubBook_isbn" BIGINT REFERENCES "bookClubPicksBooks"(isbn) ON DELETE CASCADE,
           "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn) ON DELETE CASCADE,
-          "isInappropriate" BOOLEAN DEFAULT false,
-          "isNotAccurate" BOOLEAN DEFAULT false,
+          "isInappropriate" INT DEFAULT 0,
+          "isNotAccurate" INT DEFAULT 0,
           comment VARCHAR(1000)
         )`);
     await client.query(`
@@ -152,8 +152,8 @@ const createTables = async () => {
           "graphicBook_isbn" BIGINT REFERENCES reviews("graphicBook_isbn"),
           "bookClubBook_isbn" BIGINT REFERENCES reviews("bookClubBook_isbn"),
           "childrensBook_isbn" BIGINT REFERENCES reviews("childrensBook_isbn"),
-          inappropriate BOOLEAN REFERENCES reviews("isInappropriate"),
-          not_accurate BOOLEAN REFERENCES reviews("isNotAccurate")
+          inappropriate INT REFERENCES reviews("isInappropriate"),
+          not_accurate INT REFERENCES reviews("isNotAccurate")
           )`);
     await client.query(`
         CREATE TABLE ownership(
@@ -1476,8 +1476,8 @@ async function createInitialReviews() {
       null,
       9780593321447,
       null,
-      false,
-      false
+      0,
+      0
     );
 
     await createReview(
@@ -1489,8 +1489,8 @@ async function createInitialReviews() {
       null,
       null,
       null,
-      false,
-      false
+      0,
+      0
     );
 
     await createReview(
@@ -1502,8 +1502,8 @@ async function createInitialReviews() {
       null,
       null,
       null,
-      false,
-      false
+      0,
+      0
     );
     console.log("###");
     const allCreatedReviews = await getAllReviews();
