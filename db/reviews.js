@@ -114,11 +114,31 @@ async function destroyReview(id) {
   }
 }
 
+async function updateReviewFlags(reviewId, inappropriateIncrement, inaccurateIncrement) {
+  try {
+    const query = `
+      UPDATE reviews
+      SET "isInappropriate" = "isInappropriate" + $2,
+          "isNotAccurate" = "isNotAccurate" + $3
+      WHERE id = $1
+      RETURNING *
+    `;
+    const values = [reviewId, inappropriateIncrement, inaccurateIncrement];
+
+    const result = await client.query(query, values);
+
+    return result.rows[0]; // Return the updated review
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createReview,
   getAllReviews,
   getReviewsByUserId,
   getReviewsById,
   updateReview,
-  destroyReview
+  destroyReview,
+  updateReviewFlags
 };

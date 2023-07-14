@@ -1,6 +1,6 @@
 const express = require("express");
 const reviewsRouter = express.Router();
-const { createReview, getAllReviews, getReviewsById, updateReview, destroyReview, patchReview } = require("../db/reviews.js");
+const { createReview, getAllReviews, getReviewsById, updateReview, destroyReview, updateReviewFlags } = require("../db/reviews.js");
 
 reviewsRouter.get("/:id", async (req, res, next) => {
     try {
@@ -79,15 +79,30 @@ reviewsRouter.put("/:id", async (req, res) => {
   }
 });
 
-reviewsRouter.use("/:id", async (req, res)=> {
+// reviewsRouter.use("/:id", async (req, res)=> {
+//   try {
+//     const reviewId = Number(req.params.id)
+//     const updatedData = req.body
+//     const newComment = await patchReview(reviewId, updatedData)
+//     res.send(newComment)
+//   } catch (error) {
+//     throw(error)
+//   }
+// })
+
+//Report Review
+reviewsRouter.put('/:id/report', async (req, res) => {
+  const { id } = req.params;
+  const { isInappropriate, isNotAccurate } = req.body;
+
   try {
-    const reviewId = Number(req.params.id)
-    const updatedData = req.body
-    const newComment = await patchReview(reviewId, updatedData)
-    res.send(newComment)
+    await updateReviewFlags(id, isInappropriate, isNotAccurate);
+
+    res.json({ message: 'Review reported successfully' });
   } catch (error) {
-    throw(error)
+    console.error('Error reporting review:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-})
+});
 
 module.exports = reviewsRouter;
