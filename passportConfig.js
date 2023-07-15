@@ -14,6 +14,14 @@ const {
 } = require("./db/users");
 
 module.exports = (passport) => {
+  passport.serializeUser(function (user, done) {
+    done(null, user);
+  });
+
+  passport.deserializeUser(function (user, done) {
+    done(null, user);
+  });
+
   passport.use(
     new GoogleStrategy(
       {
@@ -24,9 +32,8 @@ module.exports = (passport) => {
       },
       async (request, accessToken, refreshToken, profile, done) => {
         try {
-          let existingUser = await getUserByEmail({
-            "google.email": profile.emails[0],
-          });
+          let existingUser = await getUserByUsername(profile.id);
+
           // if user exists return the user
           if (existingUser) {
             return done(null, existingUser);
@@ -74,5 +81,3 @@ module.exports = (passport) => {
     )
   );
 };
-
-//

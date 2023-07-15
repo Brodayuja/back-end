@@ -4,6 +4,8 @@ const app = express();
 const PORT = 3000;
 const path = require("path");
 const jwt = require("jsonwebtoken");
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 
 const passport = require("passport");
 require("./passportConfig")(passport);
@@ -17,6 +19,47 @@ app.use(cors());
 const client = require("./db/index");
 client.connect();
 
+app.use(cookieParser());
+
+app.use(
+  cookieSession({
+    name: "google-auth-session",
+    keys: ["key1", "key2"],
+  })
+);
+
+// const isLoggedIn = (req, res, next) => {
+//   if (req.user) {
+//     next();
+//   } else {
+//     if (res.status) {
+//       res.status(401).send("Unauthorized");
+//     } else {
+//       res.statusCode = 401;
+//       res.send("Unauthorized");
+//     }
+//   }
+// };
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/index.html"));
+});
+
+app.use(express.json());
+
+app.use("/api", require("./api"));
+
+app.get("/failed", (req, res) => {
+  res.send("Failed");
+});
+// app.get("/success", (req, res) => {
+//   // isLoggedIn(req.user);
+//   res.redirect();
+// });
+
 // Redirect the user to the Google signin page
 app.get(
   "/auth/google",
@@ -25,8 +68,9 @@ app.get(
 // Retrieve user data using the access token received
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { session: false }),
+  passport.authenticate("google", { failureRedirect: "/failed" }),
   (req, res) => {
+    console.log(req.user, "console log for req.user");
     jwt.sign(
       { user: req.user },
       "secretKey",
@@ -36,35 +80,23 @@ app.get(
           return res.json({
             token: null,
           });
+        } else {
+          res.cookie("id", req.user.id, { httpOnly: false });
+          res.cookie("username", req.user.username, { httpOnly: false });
+          //Token set in cookie
+          res.cookie("token", token, { httpOnly: false });
+          res.redirect(302, "http://localhost:5173/browse");
         }
-        res.json({
-          token,
-        });
       }
     );
   }
 );
-// profile route after successful sign in
-app.get("/profile", (req, res) => {
-  console.log(req);
-  res.send("Welcome");
+
+app.get("/logout", (req, res) => {
+  req.session = null;
+  req.logout();
+  res.redirect("/");
 });
-
-app.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  (req, res, next) => {
-    res.send("Welcome");
-  }
-);
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/index.html"));
-});
-
-app.use(express.json());
-
-app.use("/api", require("./api"));
 
 app.listen(PORT, () => {
   console.log(`The server is up and running on port: ${PORT}`);
