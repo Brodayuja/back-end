@@ -26,12 +26,17 @@ router.use(async (req, res, next) => {
     try {
         console.log(process.env.JWT_SECRET)
       const parsedToken = jwt.verify(token, process.env.JWT_SECRET);
-      
-      const id = parsedToken && parsedToken.id
-      if (id) {
+      console.log(parsedToken, "PARSED TOKEN!!!!")
+      if(parsedToken.user){
+        const id = parsedToken && parsedToken.user.id;
+        req.user = await getUserById(id);
+        next();
+      } else {
+        const id = parsedToken && parsedToken.id;
         req.user = await getUserById(id);
         next();
       }
+
     } catch (error) {
       next(error);
     }

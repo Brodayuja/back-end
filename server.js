@@ -73,7 +73,7 @@ app.get(
     console.log(req.user, "console log for req.user");
     jwt.sign(
       { user: req.user },
-      "secretKey",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" },
       (err, token) => {
         if (err) {
