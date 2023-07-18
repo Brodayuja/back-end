@@ -179,6 +179,18 @@ async function createInitialUsers() {
   try {
     console.log("Starting to create initial users.");
     await createUser(
+      "Anonymous",
+      "anonymous",
+      "anonymous",
+      "anon@anon.com",
+      false,
+      "",
+      "Anonymous",
+      "",
+      "",
+      ""
+    );
+    await createUser(
       "Jane",
       "testUser1",
       "12345678",
@@ -639,7 +651,7 @@ async function createInitialFictionBooks() {
         "241 p."
       ),
       await createFictionBook(
-        9780274808328,
+        9780307277671,
         "The Da Vinci Code",
         "Dan Brown",
         "Thriller",
@@ -1468,9 +1480,226 @@ async function createInitialReviews() {
     console.log("Starting to create reviews.");
 
     await createReview(
-      "Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!",
+      "If the Tudors lived in prohibition-era Virginia, it would be this book. It's a very simply written emotional roller coaster ride, but it's surprisingly light at the same time.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9781501117299,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I feel like I was just given a history lesson but in the most emotionally and psychologically damaging way possible.",
       5,
       1,
+      null,
+      null,
+      null,
+      9780375842207,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I'm sure there was a message hidden in this book somewhere that went completely over my head. Oops! And I very much enjoyed the fairytale style in which it's written.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780062315007,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I was blown away by this book. I finished it a few days ago and can’t stop thinking about it. Tara Westover grew up under the watchful eye of a survivalist and fundamentalist family. Her parents did not believe in sending children to school for fear of being brainwashed, they did not believe in doctors, hospitals or medication. Whenever a member of the family was injured they would be treated at home with tinctures, herbs, and homemade remedies. There is a lot more to the story than this brief description.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      9780399590528,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Excellent writing, strong concept. I am personally burnt out on slavery narratives so I cannot say this was a pleasure to read. So much unrelenting horror. Whitehead does an excellent job of portraying slavery and America as a slave nation. The idea of the underground railroad, as an actual railroad, is so smart and interesting. I wish he had actually done more with the railroad itself.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780345804327,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I'm at a loss to explain why this novel is so special, but special it is. Haddon operates on the Poe principle - not including any wasted words, making every character come to life with a minimum of description and fewer lines of dialogue. I fell in love with the narrator, but I am not certain why - except perhaps that he's transparently innocent and confident in his constellation of quirks, preferences and behaviors that many would characterize as off-putting and/or anti-social.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9781400032716,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "A fantastic and philosophical novel that I had yet to read. Dorian will remain young and attractive, the portrait carrying the heavy burden of old age and ugliness. Since his face and body no longer reflect his soul, he believes himself untouchable. His life becomes a work of art, his pure soul hidden in the portrait of the painting. He now has two faces, one real, the other fantastic. How far will this man, deprived of scruples and morals, free from the chains of old age and ugliness, go to satisfy his pleasures? But will this diabolical Narcissus resist the sight of his portrait revealing the darkness of his being? Tearing the veil of illusion, what will remain of her beauty? A haunting story.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780141439570,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This was a really good book that leaves one with more questions than it answers, especially at this moment with the explosion in investment and growth in health/biotech. A lot of those questions are ones I wouldn't know how to answer myself either.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9781400052189,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "So glad I reread this! I loved it even more this time and it just reaffirmed that this is my favorite series",
+      5,
+      1,
+      null,
+      null,
+      null,
+      9780553381689,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I have never wanted so badly for the characters in a book to be real. I want to meet them all the way I want to meet the president, or Taylor Swift. This story is perfectly told. It is perfectly paced, it is brilliantly written, it is beautifully crafted. Andy Weir does this incredible thing where he make the reader feel the isolation that Mark Wagner feels, and he does it so subtly, we don't even realize that he's doing it until it's done. The Martian completely captivated me. I couldn't wait to find out what happened next, and I never wanted it to end.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      9780553418026,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "if i hadnt already seen the TV show, this definitely would have been a 5 star read. but because i already knew how everyone is connected and how it ends, there really wasnt the shocking wow factor that could have been.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780425274866,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I've been told by so many people that I need to read this book. It gets so much hype that I thought there was absolutely NO way it would live up to it. But it did more than that. It surpassed it. My favourite books is a pretty exclusive list and it usually takes me a while to decide whether a book fits that list or not but this was an instant favourite.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      9781250080400,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "my LORD i truly enjoyed this. there were a few minor things with the pacing that i would have changed just a smidge, and it didn't impact me quite as much as ng's debut, but this was beautiful and wonderful in its own way. i am SO excited for the adaptation. also, i can safely say now that celeste ng is one of my favorite authors and the next thing that she writes cannot come quickly enough. read!! this! book!!!",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780735224315,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This is not a normal love story, but the discussion of long repressed feelings, psychology, trauma, depression, and human behavior in general. The focus is the slow open of a traumatized soul and the meaning of deep friendship.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780735220690,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Surprised by how much I enjoyed this book because I am a bit burnt out on post apocalyptic fiction. Well written, intricately plotted. The ending falters a bit, awash in an overreach for poignancy. I know how I definitely don't want to die and that is on a quarantined airplane on a tarmac in Northern Michigan, with a bunch of other plague-ridden folk.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780804172448,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Even if I didn't like it, I don't think I'd find so much in it to HATE it. The approach is different, which some might call trite or some call imaginative. I think I just liked Susie. She spoke what was on her mind, the perspective was fresh and the subject wasn't typical. Maybe this was a product of hype? I hadn't heard of it until a few friends recommended it to me last week. It took me a few hours to read and I enjoyed it. I won't rave on it, but I appreciate a good story.",
+      3,
+      1,
+      null,
+      null,
+      null,
+      9780316168816,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I did really enjoy this but not as much as I'd expected to. I think too many people were telling me how much I was going to love it and how emotional it was and that kind of set me up for failure.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      9780143124542,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Read this book in high school and it had a major impact on me not only emotionally but it happened to spark a need to find and explore books of all genres, this my first foray into the postapocalyptical. I reread this one just a couple of years ago and even though it wasn't at all how I remembered it, the story and characters still held up and I loved it. That kind of benchmark says a lot about a book.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      9780060931391,
+      null,
+      0,
+      0
+    );
+
+    await createReview(
+      "Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!",
+      5,
+      2,
       null,
       null,
       null,
@@ -1483,7 +1712,7 @@ async function createInitialReviews() {
     await createReview(
       "I REALLY enjoyed this book!!! Fizzy was a funny and fiesty MC, Connor was a perfect book boyfriend, the plot was creative and I loved the character and plot crossovers from THE SOULMATE EQUATION.",
       4,
-      2,
+      3,
       null,
       9781982173432,
       null,
@@ -1496,7 +1725,7 @@ async function createInitialReviews() {
     await createReview(
       "This book is such a great mix of memoir, travelogue, and birding. Filled with empathy, humor, nature, and hard-won wisdom, I recommend this to readers who enjoy well-written non-fiction.",
       5,
-      3,
+      4,
       9780393866704,
       null,
       null,
@@ -1505,6 +1734,972 @@ async function createInitialReviews() {
       0,
       0
     );
+await createReview(
+      "Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!",
+      5,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780593308431,
+      0,
+      0
+    );
+await createReview(
+      "4.5 stars; as I finished this, I immediately wanted to start over, read it again, see what I may have missed the first time. Gonna be thinking about this one for a long time!",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9781646140893,
+      0,
+      0
+    );
+await createReview(
+      "My son and I love this book! So much so that our poor little copy is falling apart and we need a new one.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780064431781,
+      0,
+      0
+    );
+await createReview(
+      "For such a small children's book The Giving Tree has managed to polarize opinions on a very interesting topic: the joy of giving. At what point does selflessness equal madness and folly, or at what point is unconditional love become toxic behavior?",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780060256654,
+      0,
+      0
+    );
+await createReview(
+      "I read this book a thousand times to the little girl I was a nanny for this summer. It is the perfect book to read right before a nap because I found my voice would naturally get softer while I flipped the pages.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780064430173,
+      0,
+      0
+    );
+await createReview(
+      "This is not my first time with the caterpillar. I used to read it a lot when I worked with children. I like that it's short, that it helps them learn numbers and the days of the week. Now that I think of it, I did not have this for my son when he was small and learning to count. Shame on me.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780140569322,
+      0,
+      0
+    );
+await createReview(
+      "Many people may not like this book or think it is too simple a book, not really a story. I think this is a great book. My children love it. It is a perfect book for young children who are just starting to learn letters, their sounds, and words. It is also a great book for those children who may not be great readers. When I taught first grade, I had a few students who weren't able to read. Their confindence level was low and we had a really hard time finding good books that they were able to read independently. But this was one of the few books they enjoyed reading on their own. Any book that can make a child feel like they are a successful reader is a great book in my opinion.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780141501598,
+      0,
+      0
+    );
+await createReview(
+      "This book is a classic and there is absolutely nothing I can say that hasn't already been said by countless reviewers. You really can't go wrong with Dr. Seuss, and there's a reason people from all generations are familiar with this book. This book is, put quite simply, just tons of fun to read. It doesn't matter if you are a child or an adult. Almost all of the words are sight words, so it's easy enough to read for beginners. The story is wonderfully silly, and there's a great rhythm to the rhymes that is characteristic of Dr. Seuss' books. I would highly recommend this for children 4 to 8, but it's also great practice for older kids who need help recognizing and learning rhythm in poetry.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780007947164,
+      0,
+      0
+    );
+await createReview(
+      "I feel like I've heard the title all my life but never read nor knew what it was about. I actually thought the girls name was Charlotte and not the spiders and this story was similar to Matilda. Although this book did not disappoint in anyway I was rather excited to read the actual story and learn about it. Such a nice children's book!",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780064400558,
+      0,
+      0
+    );
+await createReview(
+      "Matilda is a lovely little book. It’s a book about standing up against bullies (no matter who the bullies are.) It’s also a book about learning to live with yourself, about being who you are despite the pressures those who are supposed to love you may exert on your personality. It’s a book written for readers and one that establishes so firmly why reading is so damn important in a world that is becoming increasingly detached from the things that truly matter in life.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780593527498,
+      0,
+      0
+    );
+await createReview(
+      "A classic of children's literature. Even on re-reading this as an adult, it held up very well.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780312367541,
+      0,
+      0
+    );
+await createReview(
+      "Really great story about bullying and what it's like to be different in the mean world of middle school. My only issue is there wasn't much of a plot and I found it slow at times but I think that may be because it's middle grade. I guess I just would've liked a more cohesive story line.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780593378175,
+      0,
+      0
+    );
+await createReview(
+      "This was so cute and funny, i laughed out loud many times even the comedy books that i have read didn't make me laugh this hard!",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9781419741852,
+      0,
+      0
+    );
+await createReview(
+      "First let me say I love Dr. Seuss. I just finished reading 'Green Eggs And Ham' with my granddaughter and we really enjoyed it. In short, the book teaches children to try something first before they decide they don't like something. The illustrations are great! I beleve we can all take a lesson from this one.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780375973963,
+      0,
+      0
+    );
+await createReview(
+      "A wonderful and delightful book. The kids will love it. I just found the illustrations to be a bit creepy...",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780395389492,
+      0,
+      0
+    );
+await createReview(
+      "A wonderful tale and movie about dealing with bullies. A must for kids!",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780142403877,
+      0,
+      0
+    );
+await createReview(
+      "Absolute solid gold standard. Phenomenal. Don't let the movies pollute your memories of this book, it is OUTSTANDING.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780439023528,
+      0,
+      0
+    );
+await createReview(
+      "i read this book at the age of approximately 8 and immediately transferred all of my hopes and dreams into discovering, touring, and inheriting a whimsical chocolate factory.",
+      4,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780142410318,
+      0,
+      0
+    );
+await createReview(
+      "My inner child is absolutely devastated that I didn't read this series when I was a kid. Percy Jackson was one of those series that was always there, just on the periphery of my social conscious. I knew I should read it, but for one reason or another I gravitated to other things instead.",
+      5,
+      1,
+      null,
+      null,
+      null,
+      null,
+      9780545799003,
+      0,
+      0
+    );
+  
+    await createReview(
+      "This one kept me on the edge of my seat! It’s a fast pace thriller with lots of characters, but don’t worry keeping track because eventually everything merges together. It was marketed as horror, but it’s so twisty that I will take the liberty to labeled it as thriller-horror, the twists kept coming and fast.",
+      4,
+      1,
+      null,
+      9781728270258,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Goodness gracious this was very unsettling. I'm already a pretty paranoid person, so the idea of Big Brother was both very intriguing but also extremely frightening. I really enjoyed reading this, but there were moments when I wasn't invested in the story and wanted to take a break from it, mostly in the last half of the book. Still DEFINITELY worth the read, though!",
+      4,
+      1,
+      null,
+      9780451524935,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Rereading this book as an adult made me realize how truly beautiful and wonderful it is. It will forever be one of my favorites.",
+      5,
+      1,
+      null,
+      9780060935467,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This book becomes far better when you take all of Gatsby's mystery and just think of him as Batman. The whole book falls into place!",
+      4,
+      1,
+      null,
+      9798351145013,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Second time around and still a timeless classic!",
+      4,
+      1,
+      null,
+      9780141439518,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "There are some areas in this book that we might question the actions of Holden, especially if we reread this book after we have grown up. But still, I think that this is one of the best coming of age novels I was lucky enough to read in my life.",
+      4,
+      1,
+      null,
+      9780316769174,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Finally I've read this ultimate fantasy classic. I really liked it, but can't say I loved it. Maybe cos it's lacking epic atmosphere, I've expected it would have. Bilbo's adventures were funny and exciting but not unexpected thanks to the movie adaptation. Although it's a definite must-read to all fantasy fans.",
+      4,
+      1,
+      null,
+      9780547928227,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Why the heck did I not read Harry Potter before now...its flipping magical (literally)!",
+      5,
+      1,
+      null,
+      9780545790352,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "3.75 This book flew several miles over my head but nevertheless, I enjoyed the ride.",
+      4,
+      1,
+      null,
+      9780060883287,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I believe writing a review on ultimate classic is pointless. So I'll just say that I wasn't impressed or exited but read it with interest. Although I didn't love it I would I agree its an absolute masterpiece.",
+      4,
+      1,
+      null,
+      9780547928210,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I have been a compulsive reader all my adult years - I always read because I was DRIVEN to see how a book ENDS. That is wrong-headed - as any Narnian will tell you. We must read DEVOTEDLY - purely out of Love!",
+      5,
+      1,
+      null,
+      9780064471046,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "It's been a while since I've been this frustrated with a main character...",
+      4,
+      1,
+      null,
+      9781594631931,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "2nd time reading this. Enjoyed it much more the 2nd time",
+      4,
+      1,
+      null,
+      9780060850524,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Nameless father and son navigating a bleak, ash-strewn, post-apocalyptic world. Shows the best and worst of humanity and the powerful love of a father for his child. Very gloomy. Shifty punctuation. Like The Walking Dead, but without the zombies.",
+      4,
+      1,
+      null,
+      9780307387899,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I read this years ago and remember being glued to my couch in my dingy little basement apartment for a weekend. I've not read it again, or any other books by Dan Brown, but that book sure was a page-turner. Now a guaranteed find at any thrift store (or Op Shop as we call them in New Zealand) worldwide.",
+      4,
+      1,
+      null,
+      9780307277671,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Loved this! Admittedly, I did see the film last year so reading this felt more like a refresher, but I wanted to pick up something light & summery—and this was it! Plus now I can dive right into the sequels which is exactly what I want right now.",
+      4,
+      1,
+      null,
+      9780345803788,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Great story from start to finish. I was pulled into the story right away and didn't want to sleep, eat or do anything until I finished it. So much emotion and the writer shows all possibilities in human relationships. It's a beautiful story about love and loss and hope. Highly recommend!!!",
+      4,
+      1,
+      null,
+      9780142001745,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I'm never getting married- I can't risk this",
+      4,
+      1,
+      null,
+      9780307588371,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This is a book where coloured maids in 1963 are afraid to speak up. This is a book where they gain the courage to tell a white lady what actually happens inside their lives. No one is ready to hear the truth, everyone is scared for their future, but bravery is a strong attire to have, and the maids prove they have what it takes. Lot of courage, lots of excitement, anxiety and me biting my nails over and over again, but definitely book that's worth reading. And definitely a book that will open your eyes about what actually happened back then.",
+      5,
+      1,
+      null,
+      9780425232200,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Loved it! an interesting,mystery filled and very thrill-seeking storyline..was well written,nice movie also... (paperback!)",
+      4,
+      1,
+      null,
+      9780307949486,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Things are gearing up but there is so much happening that it's hard to keep track of all the moving parts and as such my enjoyment was slightly lessened.",
+      5,
+      1,
+      null,
+      null,
+      9781974732173,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This was my first comic and I liked it a lot. Long in the middle but start and end are great and the way characters are developed is fantastic.",
+      4,
+      1,
+      null,
+      null,
+      9781779501127,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Never read a Batman comic in my life before this one, and this was great! Wish it was longer!",
+      4,
+      1,
+      null,
+      null,
+      9781401294052,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Really cool 1st Volume. Weird wacky and gory. I think my watching of the tv show may have ruined the occasional twists and major plot points a little.",
+      4,
+      1,
+      null,
+      null,
+      9781401270667,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This was my first time reading this and I enjoyed it immensely. V is wonderful and I understand now how his character has stood the test of time.",
+      4,
+      1,
+      null,
+      null,
+      9781779511195,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This was honestly brilliant! The story was so well constructed and I loved to see if develop, taking some surprising twists and turns a long the way!",
+      4,
+      1,
+      null,
+      null,
+      9780785190210,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "At first I wasn't sure if this was going to be for me. It starts off slow, weird, lots of words but very little meaning connecting for me. Then...after issue 2, we get into the goods.",
+      4,
+      1,
+      null,
+      null,
+      9781401284770,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I haven’t read a comic book since I was a child, saving my measly allowance for Archie and his friends. Once I discovered my mother’s Harold Robbins novels, I never went back to comics…until now.",
+      4,
+      1,
+      null,
+      null,
+      9781563899805,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Like Hellboy? This is where to start with the graphic novels, if you haven't already read it. You'll like it. I promise.",
+      4,
+      1,
+      null,
+      null,
+      9781593070946,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "uhmmmmm YES - I'm in love",
+      4,
+      1,
+      null,
+      null,
+      9781607066019,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Bought this special edition just as an excuse to reread the series. Loved it even more this time; but damn this edition is heavy.",
+      5,
+      1,
+      null,
+      null,
+      9781506711980,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Im having so mutch fun Reading about the U.A high sport festival, cant wait to see how it ends!",
+      5,
+      1,
+      null,
+      null,
+      9781421585116,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "One Punch Man has this perfect synergy of god-level splash page action sequences and hilarious cultural satire.",
+      5,
+      1,
+      null,
+      null,
+      9781421585642,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "It's a really great introduction to this new world, really, really good volumen 1! As a fan for the anime, I already know a lot, but, it gives a few more information that the adaptation don't have. Highly recommend.",
+      4,
+      1,
+      null,
+      null,
+      9781421597126,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Wow! This manga is very cool! Great opening volume for a series. The pace is snappy and the tone is dark. Great fun!",
+      5,
+      1,
+      null,
+      null,
+      9781421543659,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I didn't think that this would be as good as anime (because anime is bloody fantastic), but it was. I loved the art style, characters and above all amazing and brutal story. My first manga, but it definitely won't be my last.",
+      4,
+      1,
+      null,
+      null,
+      9781612620244,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "It starts really slowly. The character building is also slow. But soon it gets so interesting! Mostly because I ended up rooting for the characters so well. I guess it's a common thing in manga and anime. They make you just love the characters to the point that you will follow them to any end.",
+      5,
+      1,
+      null,
+      null,
+      9781974700523,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Honestly this was pretty confusing but I get it's gonna explain as it goes on...I'm just glad to be reading this finally!",
+      4,
+      1,
+      null,
+      null,
+      9781421594965,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I absolutely love MHA: Vigilantes. A friend of mine recommended it when I told him I wish the anime had more grey-area-type characters. It definitely steers away from the typical hero's journey shonen trope. Absolutely love Pop Step.",
+      4,
+      1,
+      null,
+      null,
+      9781974701599,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "WHEN I FOUND OUT THAT HAIKYUU WAS GETTING AN ENGLISH MANGA IRL I WENT TO B&N AND BOUGHT IT IMMEDIATELY IT'S SO BEAUTIFUL. THANK YOU GOD.",
+      4,
+      1,
+      null,
+      null,
+      9781421587660,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "OMG!!! This volume was amazing! Can't wait for what will happen next!",
+      5,
+      1,
+      null,
+      null,
+      9781974708888,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "4.5 stars. This book is a delight.",
+      4,
+      1,
+      9780593242384,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This book had changed my life, the way I think, the way I precept the world. I think it should be an obligatory book for everyone on this planet.",
+      5,
+      1,
+      9780062316110,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "One of the greatest, most important, most gut wrenchingly boring books ever written by a human psychologist. Reading this book is like vitamins smell.",
+      4,
+      1,
+      9780374533557,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This book is the definitive history of electronic computers and the internet (i.e. the digital revolution). Other histories will provide more details of limited segments of time, but this provides a good overall view from the 1800s to the present.",
+      4,
+      1,
+      9781476708706,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "A readable and sobering view of cancer through the ages and the progress made in understanding its roots. It helped me let go of the myth of control over one's health and be more accepting of the general course of life. In an odd way, for me at least, the book was about thinking through how to engineer some dignity into your final exit.",
+      4,
+      1,
+      9798374637441,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Very interesting non-fiction about introverts. Definitely could relate with a lot that was said and loved learning more about the advantages of it and how to deal with being an introvert!",
+      4,
+      1,
+      9780307352156,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Jared Diamond asks the question: why did technology develop along different lines and at different times throughout the world and then goes on to study the reasons why.",
+      4,
+      1,
+      9780393354324,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "A fascinating book that taught me a lot of things about myself and other people that were distinctly uncomfortable. ",
+      4,
+      1,
+      9780061234002,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Much like the reason behind my majoring in Economics, I like Gladwell because he opens my mind to new ideas and new ways to think. Much like Economics, I believe he's far from perfect, but I really enjoy viewing the world through his lens.",
+      4,
+      1,
+      9780316010665,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This book is fully deserving of the 4 star rating. The author took what is a complicated topic, the history of genes, and created an engaging and fascinating read.",
+      4,
+      1,
+      9781476733524,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Only Hawking could write this book - simple, to the point and extremely resourceful. Cosmology is not an easy subject neither can everyone understand its deep connotations. Hawking made it understandable in the most layman terms possible.",
+      4,
+      1,
+      9780553380163,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Good to Great has no breakthrough concepts to offer. Collins is good at inventive metaphors and catch phrases to push concepts through but ultimately there is really nothing counter-intuitive or revolutionary about the results of this study.",
+      4,
+      1,
+      9780066620992,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "A fascinating look at how different societies have failed, I read this many years ago, but just noticed that Jared Diamond has a new book coming out which reminded me. Years later and I still think of some of the examples from time to time. While this is not a quick or easy read, it was so compelling I never put it down for very long.",
+      4,
+      1,
+      9780143117001,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I have to admit that this book was a guilty pleasure, I really enjoyed it and some of the arguments presented on it are so interesting, but in general this is an uneven book, with a lot of generalizations that come out of nowhere and not so much intellectual background in elaborating its main thesis.",
+      4,
+      1,
+      9781400063512,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I borrowed this book through kindle unlimited. It is an excellent astrophysics book for the layperson. However, it is chock full of scientific information about the universe, electrons, neutrinos, etcetera. A solid 4 stars.",
+      4,
+      1,
+      9780393609394,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This is a beautifully produced graphic novel that tells part of the story of the rise of humankind. It is based on the author's book on the same topic. I particularly liked the art style used here, which gave the content a sense of fun and wonder.",
+      4,
+      1,
+      9780063051331,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "Definitely thought provoking and fascinating. You don't have to believe every conclusion the author presents; instead you can make your own mind about things and keep exploring. That's the beauty of it.",
+      4,
+      1,
+      9780316346627,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "A very interesting take on real-life situations using principles of economic theory. Seems forced at some places but if looked at objectively it does make sense. For real it's economic steak on a hot plate, with a side of a motley collection of interesting stories.",
+      4,
+      1,
+      9780061792809,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "This book is quite interesting. The author brings up stories to support his theories about how our world is turning into a flat world, and a lot of these stories are quite insightful. It does get boring and repetitive at some points, but it's a good read in general.",
+      3,
+      1,
+      9780739461624,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+    await createReview(
+      "I became vegetarian when I was 6 or 7, though I was thrilled while reading the hunting part! The author narrated his experience in hunting so marvellously that I got shocked and questioned myself: do I enjoy it, seriously?! I was also amazed by how quirky can be a mushroom forager! Want to meet one of them!",
+      4,
+      1,
+      9780143038580,
+      null,
+      null,
+      null,
+      null,
+      0,
+      0
+    );
+
+
+
+
+
     console.log("###");
     const allCreatedReviews = await getAllReviews();
     console.log("All Reviews", allCreatedReviews);
