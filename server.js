@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 
-const BASE_URL = "http://localhost:5173";
-// const BASE_URL = "https://pageturnersreviews.netlify.app";
+// const BASE_URL = "http://localhost:5173";
+const BASE_URL = "https://pageturnersreviews.netlify.app";
 
 const passport = require("passport");
 require("./passportConfig")(passport);
@@ -31,18 +31,6 @@ app.use(
   })
 );
 
-// const isLoggedIn = (req, res, next) => {
-//   if (req.user) {
-//     next();
-//   } else {
-//     if (res.status) {
-//       res.status(401).send("Unauthorized");
-//     } else {
-//       res.statusCode = 401;
-//       res.send("Unauthorized");
-//     }
-//   }
-// };
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -58,10 +46,7 @@ app.use("/api", require("./api"));
 app.get("/failed", (req, res) => {
   res.send("Failed");
 });
-// app.get("/success", (req, res) => {
-//   // isLoggedIn(req.user);
-//   res.redirect();
-// });
+
 
 // Redirect the user to the Google signin page
 app.get(
