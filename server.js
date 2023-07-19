@@ -7,6 +7,9 @@ const jwt = require("jsonwebtoken");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 
+const BASE_URL = "http://localhost:5173";
+// const BASE_URL = "https://pageturnersreviews.netlify.app";
+
 const passport = require("passport");
 require("./passportConfig")(passport);
 
@@ -85,7 +88,7 @@ app.get(
           res.cookie("username", req.user.username, { httpOnly: false });
           //Token set in cookie
           res.cookie("token", token, { httpOnly: false });
-          res.redirect(302, "https://pageturnersreviews.netlify.app/browse");
+          res.redirect(302, `${BASE_URL}/browse`);
         }
       }
     );
@@ -95,7 +98,7 @@ app.get(
 app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
-  res.redirect("https://pageturnersreviews.netlify.app/");
+  res.redirect(`${BASE_URL}`);
 });
 
 app.listen(PORT, () => {
