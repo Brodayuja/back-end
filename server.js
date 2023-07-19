@@ -95,7 +95,7 @@ app.get(
 app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
-  res.redirect("/");
+  res.redirect("http://localhost:5173/");
 });
 
 app.listen(PORT, () => {
