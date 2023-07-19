@@ -159,8 +159,11 @@ async function getUserById(userId) {
 
 async function updateUser(id, fields = {}) {
   // build the set string
+  if (fields.password){
+    const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT);
+    fields.password = hashedPassword
+  }
   const fieldsKeys = Object.keys(fields);
-  console.log(fieldsKeys, "fieldsKeys in update user");
 
   const mapOfStrings = fieldsKeys.map((key, index) => `"${key}"=$${index + 1}`);
   console.log(mapOfStrings, "map of string in update user");
