@@ -85,7 +85,7 @@ app.get(
           res.cookie("username", req.user.username, { httpOnly: false });
           //Token set in cookie
           res.cookie("token", token, { httpOnly: false });
-          res.redirect(302, "http://localhost:5173/browse");
+          res.redirect(302, "https://pageturnersreviews.netlify.app/browse");
         }
       }
     );
@@ -95,7 +95,7 @@ app.get(
 app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
-  res.redirect("http://localhost:5173/");
+  res.redirect("https://pageturnersreviews.netlify.app/");
 });
 
 app.listen(PORT, () => {
