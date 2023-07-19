@@ -121,8 +121,8 @@ const createTables = async () => {
             "aboutMe" TEXT,
             is_owner BOOLEAN DEFAULT false,
             my_comments VARCHAR[],
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
         )`);
     await client.query(`
     
@@ -130,7 +130,7 @@ const createTables = async () => {
           id SERIAL PRIMARY KEY,
           content VARCHAR(1000) NOT NULL,
           score INT NOT NULL,
-          user_id INT REFERENCES users(id),
+          user_id INT REFERENCES users(id) ON DELETE CASCADE,
           "nfBook_isbn" BIGINT REFERENCES "nfBooks"(isbn) ON DELETE CASCADE,
           "fictionBook_isbn" BIGINT REFERENCES "fictionBooks"(isbn) ON DELETE CASCADE,
           "graphicBook_isbn" BIGINT REFERENCES "graphicNovelsAndMangaBooks"(isbn) ON DELETE CASCADE,
@@ -139,7 +139,7 @@ const createTables = async () => {
           "isInappropriate" INT DEFAULT 0,
           "isNotAccurate" INT DEFAULT 0,
           comment VARCHAR(1000),
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
         )`);
     await client.query(`
         CREATE TABLE reports (
@@ -157,7 +157,7 @@ const createTables = async () => {
           "childrensBook_isbn" BIGINT REFERENCES reviews("childrensBook_isbn"),
           inappropriate INT REFERENCES reviews("isInappropriate"),
           not_accurate INT REFERENCES reviews("isNotAccurate"),
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
           )`);
     await client.query(`
         CREATE TABLE ownership(
@@ -1738,7 +1738,7 @@ async function createInitialReviews() {
       0,
       0
     );
-await createReview(
+    await createReview(
       "Breathtaking, mind blowing, complex, serene, intelligent! Those are the first words pop into my mind when I finish the fascinating journey and one of the best books of 2022!",
       5,
       1,
@@ -1750,7 +1750,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "4.5 stars; as I finished this, I immediately wanted to start over, read it again, see what I may have missed the first time. Gonna be thinking about this one for a long time!",
       4,
       1,
@@ -1762,7 +1762,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "My son and I love this book! So much so that our poor little copy is falling apart and we need a new one.",
       4,
       1,
@@ -1774,7 +1774,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "For such a small children's book The Giving Tree has managed to polarize opinions on a very interesting topic: the joy of giving. At what point does selflessness equal madness and folly, or at what point is unconditional love become toxic behavior?",
       4,
       1,
@@ -1786,7 +1786,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "I read this book a thousand times to the little girl I was a nanny for this summer. It is the perfect book to read right before a nap because I found my voice would naturally get softer while I flipped the pages.",
       4,
       1,
@@ -1798,7 +1798,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "This is not my first time with the caterpillar. I used to read it a lot when I worked with children. I like that it's short, that it helps them learn numbers and the days of the week. Now that I think of it, I did not have this for my son when he was small and learning to count. Shame on me.",
       4,
       1,
@@ -1810,7 +1810,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "Many people may not like this book or think it is too simple a book, not really a story. I think this is a great book. My children love it. It is a perfect book for young children who are just starting to learn letters, their sounds, and words. It is also a great book for those children who may not be great readers. When I taught first grade, I had a few students who weren't able to read. Their confindence level was low and we had a really hard time finding good books that they were able to read independently. But this was one of the few books they enjoyed reading on their own. Any book that can make a child feel like they are a successful reader is a great book in my opinion.",
       4,
       1,
@@ -1822,7 +1822,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "This book is a classic and there is absolutely nothing I can say that hasn't already been said by countless reviewers. You really can't go wrong with Dr. Seuss, and there's a reason people from all generations are familiar with this book. This book is, put quite simply, just tons of fun to read. It doesn't matter if you are a child or an adult. Almost all of the words are sight words, so it's easy enough to read for beginners. The story is wonderfully silly, and there's a great rhythm to the rhymes that is characteristic of Dr. Seuss' books. I would highly recommend this for children 4 to 8, but it's also great practice for older kids who need help recognizing and learning rhythm in poetry.",
       4,
       1,
@@ -1834,7 +1834,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "I feel like I've heard the title all my life but never read nor knew what it was about. I actually thought the girls name was Charlotte and not the spiders and this story was similar to Matilda. Although this book did not disappoint in anyway I was rather excited to read the actual story and learn about it. Such a nice children's book!",
       4,
       1,
@@ -1846,7 +1846,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "Matilda is a lovely little book. It’s a book about standing up against bullies (no matter who the bullies are.) It’s also a book about learning to live with yourself, about being who you are despite the pressures those who are supposed to love you may exert on your personality. It’s a book written for readers and one that establishes so firmly why reading is so damn important in a world that is becoming increasingly detached from the things that truly matter in life.",
       4,
       1,
@@ -1858,7 +1858,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "A classic of children's literature. Even on re-reading this as an adult, it held up very well.",
       4,
       1,
@@ -1870,7 +1870,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "Really great story about bullying and what it's like to be different in the mean world of middle school. My only issue is there wasn't much of a plot and I found it slow at times but I think that may be because it's middle grade. I guess I just would've liked a more cohesive story line.",
       4,
       1,
@@ -1882,7 +1882,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "This was so cute and funny, i laughed out loud many times even the comedy books that i have read didn't make me laugh this hard!",
       4,
       1,
@@ -1894,7 +1894,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "First let me say I love Dr. Seuss. I just finished reading 'Green Eggs And Ham' with my granddaughter and we really enjoyed it. In short, the book teaches children to try something first before they decide they don't like something. The illustrations are great! I beleve we can all take a lesson from this one.",
       4,
       1,
@@ -1906,7 +1906,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "A wonderful and delightful book. The kids will love it. I just found the illustrations to be a bit creepy...",
       4,
       1,
@@ -1918,7 +1918,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "A wonderful tale and movie about dealing with bullies. A must for kids!",
       4,
       1,
@@ -1930,7 +1930,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "Absolute solid gold standard. Phenomenal. Don't let the movies pollute your memories of this book, it is OUTSTANDING.",
       5,
       1,
@@ -1942,7 +1942,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "i read this book at the age of approximately 8 and immediately transferred all of my hopes and dreams into discovering, touring, and inheriting a whimsical chocolate factory.",
       4,
       1,
@@ -1954,7 +1954,7 @@ await createReview(
       0,
       0
     );
-await createReview(
+    await createReview(
       "My inner child is absolutely devastated that I didn't read this series when I was a kid. Percy Jackson was one of those series that was always there, just on the periphery of my social conscious. I knew I should read it, but for one reason or another I gravitated to other things instead.",
       5,
       1,
@@ -1966,7 +1966,7 @@ await createReview(
       0,
       0
     );
-  
+
     await createReview(
       "This one kept me on the edge of my seat! It’s a fast pace thriller with lots of characters, but don’t worry keeping track because eventually everything merges together. It was marketed as horror, but it’s so twisty that I will take the liberty to labeled it as thriller-horror, the twists kept coming and fast.",
       4,
@@ -2699,10 +2699,6 @@ await createReview(
       0,
       0
     );
-
-
-
-
 
     console.log("###");
     const allCreatedReviews = await getAllReviews();
