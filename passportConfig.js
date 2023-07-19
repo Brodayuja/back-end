@@ -2,6 +2,10 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require("dotenv").config();
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
+
+const BASE_URL = "http://localhost:5173";
+// const BASE_URL = "https://bookrevews-back-end.onrender.com";
+
 const {
   createUser,
   getAllUsers,
@@ -27,7 +31,7 @@ module.exports = (passport) => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://bookrevews-back-end.onrender.com/auth/google/callback",
+        callbackURL: `${BASE_URL}/auth/google/callback`,
         passReqToCallback: true,
       },
       async (request, accessToken, refreshToken, profile, done) => {
