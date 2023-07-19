@@ -120,7 +120,9 @@ const createTables = async () => {
             "favoriteBooks" VARCHAR(255),
             "aboutMe" TEXT,
             is_owner BOOLEAN DEFAULT false,
-            my_comments VARCHAR[]
+            my_comments VARCHAR[],
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`);
     await client.query(`
     
@@ -136,7 +138,8 @@ const createTables = async () => {
           "childrensBook_isbn" BIGINT REFERENCES "childrensBooks"(isbn) ON DELETE CASCADE,
           "isInappropriate" INT DEFAULT 0,
           "isNotAccurate" INT DEFAULT 0,
-          comment VARCHAR(1000)
+          comment VARCHAR(1000),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`);
     await client.query(`
         CREATE TABLE reports (
@@ -153,7 +156,8 @@ const createTables = async () => {
           "bookClubBook_isbn" BIGINT REFERENCES reviews("bookClubBook_isbn"),
           "childrensBook_isbn" BIGINT REFERENCES reviews("childrensBook_isbn"),
           inappropriate INT REFERENCES reviews("isInappropriate"),
-          not_accurate INT REFERENCES reviews("isNotAccurate")
+          not_accurate INT REFERENCES reviews("isNotAccurate"),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           )`);
     await client.query(`
         CREATE TABLE ownership(
