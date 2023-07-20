@@ -73,7 +73,7 @@ app.get(
           res.cookie("username", req.user.username, { httpOnly: false });
           //Token set in cookie
           res.cookie("token", token, { httpOnly: false });
-          res.redirect(302, `${BASE_URL}`);
+          res.redirect(302, `${BASE_URL}/browse`);
         }
       }
     );
