@@ -22,6 +22,12 @@ app.use(cors());
 const client = require("./db/index");
 client.connect();
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://pageturnersreviews.netlify.app/');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(cookieParser());
 
 app.use(
@@ -69,10 +75,10 @@ app.get(
             token: null,
           });
         } else {
-          res.cookie("id", req.user.id, { httpOnly: false });
-          res.cookie("username", req.user.username, { httpOnly: false });
+          res.cookie("id", req.user.id, { httpOnly: false, sameSite: "none", secure: false });
+          res.cookie("username", req.user.username, { httpOnly: false, sameSite: "none", secure: false });
           //Token set in cookie
-          res.cookie("token", token, { httpOnly: false });
+          res.cookie("token", token, { httpOnly: false, sameSite: "none", secure: false });
           res.redirect(302, `${BASE_URL}/browse`);
         }
       }
